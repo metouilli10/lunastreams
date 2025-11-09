@@ -54,7 +54,7 @@ Use `next/head` or inject via `<Script type="application/ld+json">`.
   "@type": "Organization",
   "name": "Luna Streams",
   "url": "https://www.lunastreams.com",
-  "logo": "https://www.lunastreams.com/logo.png",
+  "logo": "https://www.lunastreams.com/logo.webp",
   "sameAs": ["https://facebook.com/lunastreams", "https://instagram.com/lunastreams"]
 }
 

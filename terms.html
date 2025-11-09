@@ -5,17 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Luna Streams Terms of Service | IPTV Australia</title>
     <meta name="description" content="Review Luna Streams Terms of Service covering account rules, payments, fair use, cancellations, and compliance for Australian IPTV subscribers.">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="preload" href="styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="styles.css"></noscript>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"></noscript>
 </head>
 <body class="legal-page">
     <a class="skip-link" href="#terms-main">Skip To Content</a>
 
     <header class="main-header">
         <nav class="header-nav">
-            <a href="index.html" class="logo" aria-label="Luna Streams home"><img src="logo.png" alt="Luna Streams IPTV logo" width="1563" height="1563"></a>
+            <a href="index.html" class="logo" aria-label="Luna Streams home">
+                <picture>
+                    <source srcset="logo.webp" type="image/webp">
+                    <img src="logo.png" alt="Luna Streams IPTV logo" width="1563" height="1563">
+                </picture>
+            </a>
             <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-navigation">
                 <span class="sr-only">Toggle navigation</span>
                 <span class="nav-toggle__bars" aria-hidden="true"></span>
@@ -211,7 +218,12 @@
     <footer class="main-footer">
         <div class="footer-content" role="contentinfo">
             <div class="footer-brand">
-                <a href="#main-content" class="footer-logo" aria-label="Luna Streams home"><img src="logo.png" alt="Luna Streams IPTV logo" width="1563" height="1563"></a>
+                <a href="#main-content" class="footer-logo" aria-label="Luna Streams home">
+                    <picture>
+                        <source srcset="logo.webp" type="image/webp">
+                        <img src="logo.png" alt="Luna Streams IPTV logo" width="1563" height="1563">
+                    </picture>
+                </a>
                 <p>Stream 10,000+ channels with Australian-first support, reliable uptime, and plans built for every screen in your home.</p>
                 <ul class="footer-contact">
                     <li><a href="mailto:support@lunastreams.com">support@lunastreams.com</a></li>
