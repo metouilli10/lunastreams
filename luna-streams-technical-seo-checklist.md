@@ -37,7 +37,7 @@ This checklist applies to:
 |----------|--------------------|
 | **Title tag** | 55–65 chars, include “Australia” |
 | **Meta description** | 140–160 chars, include “IPTV” and “Luna Streams” |
-| **Canonical URL** | Absolute URL with `https://www.lunastreams.com/...` |
+| **Canonical URL** | Absolute URL with `https://lunastreams.net/...` |
 | **OG Tags** | Include `og:image`, `og:title`, and `og:description` |
 | **Twitter Cards** | Use `summary_large_image` |
 | **Language** | `<html lang="en-AU">` |
@@ -53,8 +53,8 @@ Use `next/head` or inject via `<Script type="application/ld+json">`.
   "@context": "https://schema.org",
   "@type": "Organization",
   "name": "Luna Streams",
-  "url": "https://www.lunastreams.com",
-  "logo": "https://www.lunastreams.com/logo.webp",
+  "url": "https://lunastreams.net",
+  "logo": "https://lunastreams.net/logo.webp",
   "sameAs": ["https://facebook.com/lunastreams", "https://instagram.com/lunastreams"]
 }
 
@@ -81,7 +81,7 @@ Use FAQPage schema for each question → answer pair.
 FileImplementationsitemap.xmlAuto-generate with next-sitemaprobots.txtAllow all except /wp-admin (if any legacy)Canonical URLsAlways absolute, no query parametershreflang (optional)For English variants: en-AU, en-US if expanding later
 Example next-sitemap.config.js:
 module.exports = {
-  siteUrl: 'https://www.lunastreams.com',
+  siteUrl: 'https://lunastreams.net',
   generateRobotsTxt: true,
   priority: 0.7,
   changefreq: 'monthly',

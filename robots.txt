@@ -1,5 +1,5 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.lunastreams.com/sitemap.xml
+Sitemap: https://lunastreams.net/sitemap.xml
 
