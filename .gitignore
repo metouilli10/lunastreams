@@ -1,0 +1,12 @@
+# macOS
+.DS_Store
+
+# Node/npm caches
+node_modules/
+
+# Logs
+*.log
+
+# Editor directories
+.vscode/
+.idea/
