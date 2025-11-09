@@ -170,50 +170,151 @@ document.querySelectorAll('.accordion-header').forEach(header => {
 
 // Featured movie carousel controls
 (function initMovieCarousel() {
-    const container = document.querySelector('[data-movie-carousel]');
-    if (!container) return;
+    const containers = document.querySelectorAll('[data-movie-carousel]');
+    if (!containers.length) return;
 
-    const viewport = container.querySelector('.movie-carousel__viewport');
-    const track = container.querySelector('.movie-carousel__track');
-    const cards = track ? Array.from(track.children) : [];
-    const prevButton = container.querySelector('[data-movie-carousel-prev]');
-    const nextButton = container.querySelector('[data-movie-carousel-next]');
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    if (!viewport || !track || !cards.length) return;
+    containers.forEach(container => {
+        const viewport = container.querySelector('.movie-carousel__viewport');
+        const track = container.querySelector('.movie-carousel__track');
+        const isLooping = container.dataset.carouselLoop === 'true';
+        const originalSlides = track ? Array.from(track.children) : [];
 
-    const calculateScrollAmount = () => {
-        const firstCard = cards[0];
-        const computedStyles = getComputedStyle(track);
-        const gapValue = parseFloat(computedStyles.gap || computedStyles.columnGap || '0') || 0;
-        const cardWidth = firstCard ? firstCard.getBoundingClientRect().width : viewport.clientWidth;
-        return cardWidth * 2 + gapValue;
-    };
+        if (!viewport || !track || !originalSlides.length) return;
 
-    const updateControls = () => {
-        const maxScrollLeft = viewport.scrollWidth - viewport.clientWidth - 1;
-        if (prevButton) {
-            prevButton.disabled = viewport.scrollLeft <= 8;
+        let gapValue = 0;
+        let slideWidth = 0;
+        let scrollAmount = 0;
+        let totalOriginalWidth = 0;
+        let loopScrollOffset = 0;
+        let isAdjustingLoop = false;
+        let autoScrollInterval = null;
+
+        const recalcMeasurements = () => {
+            const computedStyles = getComputedStyle(track);
+            gapValue = parseFloat(computedStyles.gap || computedStyles.columnGap || '0') || 0;
+
+            const visibleSlide = track.querySelector('.movie-slide');
+            slideWidth = visibleSlide ? visibleSlide.getBoundingClientRect().width : viewport.clientWidth;
+
+            scrollAmount = slideWidth + gapValue;
+            totalOriginalWidth = (slideWidth * originalSlides.length) + gapValue * Math.max(0, originalSlides.length - 1);
+            loopScrollOffset = isLooping ? totalOriginalWidth : 0;
+        };
+
+        const cloneForLooping = () => {
+            if (!isLooping || track.dataset.loopCloned === 'true') return;
+
+            const prependFragment = document.createDocumentFragment();
+            const appendFragment = document.createDocumentFragment();
+
+            originalSlides.forEach(slide => {
+                const prependClone = slide.cloneNode(true);
+                prependClone.setAttribute('aria-hidden', 'true');
+                prependFragment.appendChild(prependClone);
+
+                const appendClone = slide.cloneNode(true);
+                appendClone.setAttribute('aria-hidden', 'true');
+                appendFragment.appendChild(appendClone);
+            });
+
+            track.insertBefore(prependFragment, track.firstChild);
+            track.appendChild(appendFragment);
+            track.dataset.loopCloned = 'true';
+
+            recalcMeasurements();
+
+            requestAnimationFrame(() => {
+                viewport.scrollLeft = loopScrollOffset;
+            });
+        };
+
+        const calculateScrollAmount = () => {
+            if (!scrollAmount) {
+                recalcMeasurements();
+            }
+            return scrollAmount;
+        };
+
+        const ensureLoopContinuity = () => {
+            if (!isLooping || !totalOriginalWidth || isAdjustingLoop) return;
+
+            const tolerance = Math.max(scrollAmount / 2, 1);
+            const lowerBound = loopScrollOffset - tolerance;
+            const upperBound = loopScrollOffset + totalOriginalWidth + tolerance;
+
+            if (viewport.scrollLeft <= lowerBound) {
+                isAdjustingLoop = true;
+                viewport.scrollLeft += loopScrollOffset;
+                requestAnimationFrame(() => { isAdjustingLoop = false; });
+            } else if (viewport.scrollLeft >= upperBound) {
+                isAdjustingLoop = true;
+                viewport.scrollLeft -= loopScrollOffset;
+                requestAnimationFrame(() => { isAdjustingLoop = false; });
+            }
+        };
+
+        const scrollCarousel = direction => {
+            const amount = calculateScrollAmount();
+            viewport.scrollBy({
+                left: direction * amount,
+                behavior: 'smooth'
+            });
+        };
+
+        const handleScroll = () => {
+            if (isLooping) {
+                ensureLoopContinuity();
+            }
+        };
+
+        viewport.addEventListener('scroll', handleScroll, { passive: true });
+
+        const handleResize = () => {
+            recalcMeasurements();
+            if (isLooping) {
+                isAdjustingLoop = true;
+                const remainder = viewport.scrollLeft % totalOriginalWidth;
+                viewport.scrollLeft = loopScrollOffset + (Number.isFinite(remainder) ? remainder : 0);
+                requestAnimationFrame(() => { isAdjustingLoop = false; });
+            }
+        };
+
+        window.addEventListener('resize', handleResize);
+        window.addEventListener('orientationchange', handleResize);
+
+        recalcMeasurements();
+        cloneForLooping();
+
+        const stopAutoScroll = () => {
+            if (autoScrollInterval) {
+                clearInterval(autoScrollInterval);
+                autoScrollInterval = null;
+            }
+        };
+
+        const startAutoScroll = () => {
+            if (!isLooping || prefersReducedMotion) return;
+            stopAutoScroll();
+            autoScrollInterval = setInterval(() => scrollCarousel(1), 2200);
+        };
+
+        if (isLooping) {
+            startAutoScroll();
+            viewport.addEventListener('mouseenter', stopAutoScroll);
+            viewport.addEventListener('mouseleave', startAutoScroll);
+            viewport.addEventListener('pointerdown', stopAutoScroll);
+            viewport.addEventListener('pointerup', startAutoScroll);
+            document.addEventListener('visibilitychange', () => {
+                if (document.hidden) {
+                    stopAutoScroll();
+                } else {
+                    startAutoScroll();
+                }
+            });
         }
-        if (nextButton) {
-            nextButton.disabled = viewport.scrollLeft >= maxScrollLeft;
-        }
-    };
-
-    const scrollCarousel = direction => {
-        const amount = calculateScrollAmount();
-        viewport.scrollBy({
-            left: direction * amount,
-            behavior: 'smooth'
-        });
-    };
-
-    prevButton?.addEventListener('click', () => scrollCarousel(-1));
-    nextButton?.addEventListener('click', () => scrollCarousel(1));
-
-    viewport.addEventListener('scroll', () => requestAnimationFrame(updateControls), { passive: true });
-    window.addEventListener('resize', updateControls);
-
-    updateControls();
+    });
 })();
 
 // Header scroll effect
