@@ -2670,6 +2670,7 @@ main {
         border: 1px solid rgba(15, 23, 42, 0.08);
         border-radius: 20px;
         box-shadow: 0 28px 60px rgba(15, 23, 42, 0.18);
+        display: none;
     }
 
     .js .nav-groups {
@@ -4119,49 +4120,318 @@ main {
 }
 
 @media (max-width: 768px) {
-    .trial-nav {
-        flex-wrap: wrap;
-        justify-content: center;
+    .trial-hero {
+        padding: 80px 20px 60px;
+        gap: 32px;
     }
 
-    .trial-nav__links {
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 16px;
+    .trial-hero__content {
+        gap: 18px;
     }
 
     .trial-hero h1 {
-        font-size: 32px;
+        font-size: clamp(28px, 5vw, 36px);
+        line-height: 1.2;
     }
 
-    .trial-hero__card {
-        padding: 24px;
-    }
-
-    .trial-form {
-        padding: 32px 24px;
-    }
-
-    .trial-stepper li {
-        padding: 20px;
-    }
-}
-
-@media (max-width: 520px) {
-    .trial-nav {
-        padding: 16px;
+    .trial-hero__subtext {
+        font-size: 16px;
+        line-height: 1.6;
     }
 
     .trial-hero__actions {
         flex-direction: column;
+        gap: 12px;
+    }
+
+    .trial-hero__actions .btn-primary,
+    .trial-hero__actions .btn-secondary {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .trial-hero__flags {
+        font-size: 14px;
+        gap: 8px;
+    }
+
+    .trial-hero__card {
+        padding: 24px 20px;
+        margin-top: 20px;
+    }
+
+    .trial-hero__card h2 {
+        font-size: 20px;
+    }
+
+    .trial-hero__card ul {
+        font-size: 14px;
+        gap: 6px;
+    }
+
+    .trial-form-section {
+        padding: 60px 20px;
+    }
+
+    .trial-form__intro {
+        margin-bottom: 32px;
+    }
+
+    .trial-form__intro h2 {
+        font-size: clamp(24px, 5vw, 32px);
+    }
+
+    .trial-form__intro p {
+        font-size: 15px;
+    }
+
+    .trial-form {
+        padding: 28px 20px;
+        gap: 28px;
+        border-radius: 20px;
+    }
+
+    .trial-fieldset {
+        gap: 18px;
+    }
+
+    .trial-fieldset legend {
+        font-size: 16px;
     }
 
     .trial-form__grid {
         grid-template-columns: 1fr;
+        gap: 18px;
+    }
+
+    .trial-field span {
+        font-size: 14px;
+    }
+
+    .trial-field input,
+    .trial-field select,
+    .trial-field textarea {
+        padding: 12px 14px;
+        font-size: 16px;
+    }
+
+    .trial-form__actions {
+        gap: 10px;
     }
 
     .trial-form__actions .btn-primary {
         width: 100%;
+        padding: 14px 20px;
+    }
+
+    .trial-disclaimer {
+        font-size: 12px;
+    }
+
+    .trial-highlights {
+        padding: 60px 20px;
+    }
+
+    .trial-highlights__inner {
+        gap: 32px;
+    }
+
+    .trial-highlights__intro h2 {
+        font-size: clamp(24px, 5vw, 32px);
+    }
+
+    .trial-highlights__intro p {
+        font-size: 15px;
+    }
+
+    .trial-highlight-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .trial-highlight-card {
+        padding: 22px 20px;
+    }
+
+    .trial-highlight-card h3 {
+        font-size: 18px;
+    }
+
+    .trial-highlight-card p {
+        font-size: 14px;
+    }
+
+    .trial-stats {
+        padding: 60px 20px;
+    }
+
+    .trial-stats__inner {
+        padding: 28px 20px;
+        gap: 28px;
+        border-radius: 20px;
+    }
+
+    .trial-stats__list {
+        font-size: 15px;
+        gap: 14px;
+    }
+
+    .trial-stats__list strong {
+        font-size: 26px;
+    }
+
+    .trial-compliance {
+        padding: 22px 20px;
+    }
+
+    .trial-compliance h3 {
+        font-size: 18px;
+    }
+
+    .trial-compliance p {
+        font-size: 14px;
+    }
+
+    .trial-steps {
+        padding: 60px 20px;
+    }
+
+    .trial-steps__inner {
+        gap: 32px;
+    }
+
+    .trial-steps__inner h2 {
+        font-size: clamp(24px, 5vw, 32px);
+    }
+
+    .trial-stepper {
+        gap: 20px;
+    }
+
+    .trial-stepper li {
+        padding: 20px 18px;
+        gap: 16px;
+        border-radius: 18px;
+    }
+
+    .trial-step__count {
+        width: 38px;
+        height: 38px;
+        font-size: 15px;
+    }
+
+    .trial-step__content h3 {
+        font-size: 17px;
+    }
+
+    .trial-step__content p {
+        font-size: 14px;
+    }
+
+    .trial-faq {
+        padding: 60px 20px 80px;
+    }
+
+    .trial-faq .faq-header h2 {
+        font-size: clamp(24px, 5vw, 32px);
+    }
+
+    .trial-faq .faq-header p {
+        font-size: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .trial-hero {
+        padding: 60px 16px 50px;
+    }
+
+    .trial-hero h1 {
+        font-size: 26px;
+    }
+
+    .trial-hero__subtext {
+        font-size: 15px;
+    }
+
+    .trial-hero__card {
+        padding: 20px 18px;
+        border-radius: 18px;
+    }
+
+    .trial-hero__card h2 {
+        font-size: 18px;
+    }
+
+    .trial-form-section {
+        padding: 50px 16px;
+    }
+
+    .trial-form {
+        padding: 24px 18px;
+        border-radius: 18px;
+    }
+
+    .trial-fieldset legend {
+        font-size: 15px;
+    }
+
+    .trial-highlights {
+        padding: 50px 16px;
+    }
+
+    .trial-highlights__intro h2 {
+        font-size: 24px;
+    }
+
+    .trial-highlight-card {
+        padding: 20px 18px;
+        border-radius: 16px;
+    }
+
+    .trial-stats {
+        padding: 50px 16px;
+    }
+
+    .trial-stats__inner {
+        padding: 24px 18px;
+        border-radius: 18px;
+    }
+
+    .trial-stats__list strong {
+        font-size: 24px;
+    }
+
+    .trial-compliance {
+        padding: 20px 18px;
+        border-radius: 16px;
+    }
+
+    .trial-steps {
+        padding: 50px 16px;
+    }
+
+    .trial-steps__inner h2 {
+        font-size: 24px;
+    }
+
+    .trial-stepper li {
+        padding: 18px 16px;
+        border-radius: 16px;
+    }
+
+    .trial-step__count {
+        width: 36px;
+        height: 36px;
+        font-size: 14px;
+    }
+
+    .trial-faq {
+        padding: 50px 16px 70px;
+    }
+
+    .trial-faq .faq-header h2 {
+        font-size: 24px;
     }
 }
 
@@ -5310,25 +5580,269 @@ main {
 
 @media (max-width: 768px) {
     .reseller-main {
-        gap: 60px;
-        padding: 96px 20px 110px;
+        gap: 50px;
+        padding: 80px 20px 90px;
     }
 
-    .reseller-hero__content,
+    .reseller-main .section-header {
+        margin-bottom: 32px;
+        gap: 8px;
+    }
+
+    .reseller-main .section-header h2 {
+        font-size: clamp(24px, 5vw, 32px);
+    }
+
+    .reseller-main .section-header p {
+        font-size: 16px;
+    }
+
+    .reseller-hero {
+        gap: 24px;
+    }
+
+    .reseller-hero__content {
+        padding: 32px 24px;
+        gap: 16px;
+    }
+
+    .reseller-hero__content h1 {
+        font-size: clamp(28px, 5vw, 36px);
+        line-height: 1.2;
+    }
+
+    .reseller-hero__content p {
+        font-size: 16px;
+        line-height: 1.6;
+    }
+
+    .reseller-hero__actions {
+        flex-direction: column;
+        gap: 12px;
+        margin-top: 8px;
+    }
+
+    .reseller-hero__actions .btn-primary,
+    .reseller-hero__actions .btn-secondary {
+        width: 100%;
+        justify-content: center;
+    }
+
     .reseller-hero__panel {
-        padding: 34px;
+        padding: 28px 24px;
+        gap: 14px;
     }
 
-    .reseller-demo,
-    .reseller-demo__card,
-    .reseller-credits,
-    .reseller-contact__card,
-    .reseller-resources {
-        padding: 32px;
+    .reseller-hero__panel h2 {
+        font-size: 20px;
+    }
+
+    .reseller-hero__panel ul {
+        font-size: 14px;
+        gap: 8px;
+    }
+
+    .reseller-steps__grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .reseller-step {
+        padding: 28px 24px;
+        gap: 14px;
+    }
+
+    .reseller-step h3 {
+        font-size: 20px;
+    }
+
+    .reseller-step p {
+        font-size: 14px;
+    }
+
+    .reseller-demo {
+        padding: 60px 20px;
+    }
+
+    .reseller-demo__inner {
+        gap: 28px;
+    }
+
+    .reseller-demo__inner h2 {
+        font-size: clamp(24px, 5vw, 32px);
+    }
+
+    .reseller-demo__inner p {
+        font-size: 15px;
     }
 
     .reseller-demo__cta {
         grid-template-columns: 1fr;
+        gap: 24px;
+    }
+
+    .reseller-demo__card {
+        padding: 28px 24px;
+        gap: 18px;
+    }
+
+    .reseller-demo__card h3 {
+        font-size: 22px;
+    }
+
+    .reseller-demo__price {
+        font-size: 28px;
+    }
+
+    .reseller-demo__card ul {
+        font-size: 14px;
+        gap: 8px;
+    }
+
+    .reseller-demo__note {
+        padding: 28px 24px;
+        gap: 10px;
+    }
+
+    .reseller-demo__note h3 {
+        font-size: 18px;
+    }
+
+    .reseller-demo__note p {
+        font-size: 14px;
+    }
+
+    .reseller-plans__grid {
+        grid-template-columns: 1fr;
+        gap: 22px;
+    }
+
+    .reseller-plan-card {
+        padding: 28px 24px;
+        gap: 16px;
+    }
+
+    .reseller-plan-card h3 {
+        font-size: 24px;
+    }
+
+    .plan-price {
+        font-size: 28px;
+    }
+
+    .reseller-plan-card ul {
+        font-size: 14px;
+        gap: 6px;
+    }
+
+    .reseller-credits {
+        grid-template-columns: 1fr;
+        padding: 32px 24px;
+        gap: 24px;
+    }
+
+    .reseller-credits__content h2 {
+        font-size: clamp(24px, 5vw, 32px);
+    }
+
+    .reseller-credits__content p {
+        font-size: 15px;
+    }
+
+    .reseller-credits__content ul {
+        font-size: 14px;
+        gap: 6px;
+    }
+
+    .reseller-credits__aside {
+        padding: 24px 20px;
+    }
+
+    .reseller-credits__aside h3 {
+        font-size: 18px;
+    }
+
+    .reseller-credits__aside p {
+        font-size: 14px;
+    }
+
+    .reseller-testimonials__grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+    }
+
+    .reseller-testimonials__grid blockquote {
+        padding: 24px 20px;
+        gap: 14px;
+    }
+
+    .reseller-testimonials__grid blockquote p {
+        font-size: 15px;
+    }
+
+    .reseller-testimonials__grid cite {
+        font-size: 14px;
+    }
+
+    .reseller-faq__grid {
+        grid-template-columns: 1fr;
+        gap: 22px;
+    }
+
+    .reseller-faq__grid article {
+        padding: 24px 20px;
+        gap: 10px;
+    }
+
+    .reseller-faq__grid article h3 {
+        font-size: 18px;
+    }
+
+    .reseller-faq__grid article p {
+        font-size: 14px;
+    }
+
+    .reseller-contact__card {
+        padding: 32px 24px;
+        gap: 16px;
+    }
+
+    .reseller-contact__card h2 {
+        font-size: clamp(24px, 5vw, 32px);
+    }
+
+    .reseller-contact__card p {
+        font-size: 15px;
+    }
+
+    .reseller-contact__card .btn-primary {
+        width: 100%;
+    }
+
+    .reseller-contact__details {
+        font-size: 14px;
+        gap: 8px;
+    }
+
+    .reseller-resources {
+        padding: 28px 24px;
+        gap: 16px;
+    }
+
+    .reseller-resources h2 {
+        font-size: clamp(22px, 5vw, 28px);
+    }
+
+    .reseller-resources p {
+        font-size: 15px;
+    }
+
+    .reseller-resources__list {
+        gap: 12px;
+    }
+
+    .reseller-resources__list a {
+        font-size: 15px;
     }
 
     .contact-main {
@@ -5357,31 +5871,151 @@ main {
     }
 }
 
-@media (max-width: 520px) {
-    .reseller-hero__content h1 {
-        font-size: 32px;
-    }
-
-    .reseller-hero__actions {
-        flex-direction: column;
-    }
-
+@media (max-width: 480px) {
     .reseller-main {
-        padding-left: 18px;
-        padding-right: 18px;
+        gap: 40px;
+        padding: 60px 16px 70px;
     }
 
-    .reseller-demo,
-    .reseller-demo__card,
-    .reseller-plan-card,
-    .reseller-credits,
-    .reseller-contact__card,
+    .reseller-main .section-header h2 {
+        font-size: 24px;
+    }
+
+    .reseller-main .section-header p {
+        font-size: 15px;
+    }
+
+    .reseller-hero {
+        gap: 20px;
+    }
+
+    .reseller-hero__content {
+        padding: 24px 20px;
+        border-radius: 20px;
+    }
+
+    .reseller-hero__content h1 {
+        font-size: 26px;
+    }
+
+    .reseller-hero__content p {
+        font-size: 15px;
+    }
+
+    .reseller-hero__panel {
+        padding: 24px 20px;
+        border-radius: 20px;
+    }
+
+    .reseller-hero__panel h2 {
+        font-size: 18px;
+    }
+
+    .reseller-steps__grid {
+        gap: 18px;
+    }
+
+    .reseller-step {
+        padding: 24px 20px;
+        border-radius: 18px;
+    }
+
+    .reseller-step h3 {
+        font-size: 18px;
+    }
+
+    .reseller-demo {
+        padding: 50px 16px;
+        border-radius: 24px;
+    }
+
+    .reseller-demo__inner h2 {
+        font-size: 24px;
+    }
+
+    .reseller-demo__card {
+        padding: 24px 20px;
+        border-radius: 18px;
+    }
+
+    .reseller-demo__card h3 {
+        font-size: 20px;
+    }
+
+    .reseller-demo__price {
+        font-size: 26px;
+    }
+
+    .reseller-demo__note {
+        padding: 24px 20px;
+        border-radius: 18px;
+    }
+
+    .reseller-plans__grid {
+        gap: 20px;
+    }
+
+    .reseller-plan-card {
+        padding: 24px 20px;
+        border-radius: 18px;
+    }
+
+    .plan-price {
+        font-size: 26px;
+    }
+
+    .reseller-credits {
+        padding: 28px 20px;
+        border-radius: 20px;
+    }
+
+    .reseller-credits__content h2 {
+        font-size: 24px;
+    }
+
+    .reseller-credits__aside {
+        padding: 20px 18px;
+        border-radius: 16px;
+    }
+
+    .reseller-testimonials__grid {
+        gap: 20px;
+    }
+
+    .reseller-testimonials__grid blockquote {
+        padding: 22px 18px;
+        border-radius: 18px;
+    }
+
+    .reseller-faq__grid {
+        gap: 20px;
+    }
+
+    .reseller-faq__grid article {
+        padding: 22px 18px;
+        border-radius: 18px;
+    }
+
+    .reseller-faq__grid article h3 {
+        font-size: 17px;
+    }
+
+    .reseller-contact__card {
+        padding: 28px 20px;
+        border-radius: 20px;
+    }
+
+    .reseller-contact__card h2 {
+        font-size: 24px;
+    }
+
     .reseller-resources {
-        padding: 26px;
+        padding: 24px 20px;
+        border-radius: 18px;
     }
 
-    .reseller-resources__list {
-        gap: 12px;
+    .reseller-resources h2 {
+        font-size: 22px;
     }
 
     .contact-main {
@@ -5401,3 +6035,4 @@ main {
         padding: 80px 18px 100px;
     }
 }
+

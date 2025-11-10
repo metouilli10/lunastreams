@@ -66,7 +66,9 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     const handleResize = () => {
-        if (window.innerWidth > 900) {
+        // On desktop (> 900px), menu should be visible (CSS handles this)
+        // On mobile (<= 900px), ensure menu is closed
+        if (window.innerWidth <= 900) {
             closeMenu();
         }
     };
@@ -89,7 +91,10 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    handleResize();
+    // Initialize: ensure menu is closed on mobile on page load
+    if (window.innerWidth <= 900) {
+        closeMenu();
+    }
 })();
 
 // Smooth scrolling for anchor links
