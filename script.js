@@ -382,14 +382,99 @@ if ('IntersectionObserver' in window) {
         });
     };
 
+    const toggleContainer = document.querySelector('.pricing-toggle');
+    
+    // Function to toggle between standard and premium
+    const toggleTier = () => {
+        if (!toggleContainer) return;
+        const currentTier = toggleContainer.getAttribute('data-active-tier') || 'standard';
+        const newTier = currentTier === 'standard' ? 'premium' : 'standard';
+        setActiveTier(newTier);
+    };
+    
+    // Handle button clicks (text labels) - these set specific tier
     toggleButtons.forEach(button => {
         button.addEventListener('click', (e) => {
-            e.preventDefault();
             e.stopPropagation();
             const tier = button.dataset.tier;
             setActiveTier(tier);
-        });
+        }, true); // Use capture phase
     });
+
+    // Handle toggle switch click (mobile) - clicking the track area toggles between tiers
+    if (toggleContainer) {
+        // Create a clickable overlay for the toggle track on mobile
+        const createToggleOverlay = () => {
+            if (window.innerWidth > 767) {
+                // Remove overlay if it exists and we're not on mobile
+                const existingOverlay = toggleContainer.querySelector('.toggle-track-overlay');
+                if (existingOverlay) {
+                    existingOverlay.remove();
+                }
+                return;
+            }
+            
+            // Check if overlay already exists
+            if (toggleContainer.querySelector('.toggle-track-overlay')) {
+                return;
+            }
+            
+            // Create clickable overlay for the track area
+            const overlay = document.createElement('div');
+            overlay.className = 'toggle-track-overlay';
+            overlay.setAttribute('aria-label', 'Toggle between Standard and Premium plans');
+            overlay.setAttribute('role', 'button');
+            overlay.setAttribute('tabindex', '0');
+            
+            // Insert overlay after the first button (before premium button, in the middle)
+            const standardButton = toggleContainer.querySelector('[data-tier="standard"]');
+            if (standardButton && standardButton.nextSibling) {
+                toggleContainer.insertBefore(overlay, standardButton.nextSibling);
+            } else {
+                toggleContainer.appendChild(overlay);
+            }
+            
+            // Add click handler to overlay
+            overlay.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                toggleTier();
+            });
+            
+            // Add keyboard support
+            overlay.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    toggleTier();
+                }
+            });
+        };
+        
+        // Create overlay on load and resize
+        createToggleOverlay();
+        window.addEventListener('resize', createToggleOverlay);
+        
+        // Also handle clicks on container that aren't on buttons (fallback)
+        toggleContainer.addEventListener('click', (e) => {
+            if (window.innerWidth > 767) return;
+            
+            // If click is on overlay or track area (not buttons), toggle
+            if (e.target.classList.contains('toggle-track-overlay')) {
+                return; // Overlay handler will deal with it
+            }
+            
+            // Check if click is on a button
+            if (e.target.closest('.pricing-toggle__option')) {
+                return; // Button handler will deal with it
+            }
+            
+            // Fallback: if clicking on container itself, toggle
+            if (e.target === toggleContainer) {
+                e.preventDefault();
+                toggleTier();
+            }
+        });
+    }
 
     // Initialize with default tier
     const defaultTier = document.querySelector('.pricing-toggle__option.is-active')?.dataset.tier || toggleButtons[0]?.dataset.tier || 'standard';
