@@ -361,11 +361,19 @@ if ('IntersectionObserver' in window) {
     if (!toggleButtons.length || !planGroups.length) return;
 
     const setActiveTier = (tier) => {
+        const toggleContainer = document.querySelector('.pricing-toggle');
+        
+        if (!toggleContainer) return;
+        
         toggleButtons.forEach(button => {
             const isActive = button.dataset.tier === tier;
             button.classList.toggle('is-active', isActive);
             button.setAttribute('aria-pressed', isActive ? 'true' : 'false');
         });
+
+        // Set data attribute on container for CSS styling (remove old, add new)
+        toggleContainer.removeAttribute('data-active-tier');
+        toggleContainer.setAttribute('data-active-tier', tier);
 
         planGroups.forEach(group => {
             const matches = group.dataset.tierGroup === tier;
@@ -375,11 +383,19 @@ if ('IntersectionObserver' in window) {
     };
 
     toggleButtons.forEach(button => {
-        button.addEventListener('click', () => setActiveTier(button.dataset.tier));
+        button.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            const tier = button.dataset.tier;
+            setActiveTier(tier);
+        });
     });
 
-    const defaultTier = document.querySelector('.pricing-toggle__option.is-active')?.dataset.tier || toggleButtons[0].dataset.tier;
-    setActiveTier(defaultTier);
+    // Initialize with default tier
+    const defaultTier = document.querySelector('.pricing-toggle__option.is-active')?.dataset.tier || toggleButtons[0]?.dataset.tier || 'standard';
+    if (defaultTier) {
+        setActiveTier(defaultTier);
+    }
 })();
 
 // Free trial form handling
