@@ -11,6 +11,28 @@
   <link href="https://lunastreams.net/" rel="canonical"/>
   <link href="https://lunastreams.net/" hreflang="en-au" rel="alternate"/>
   <link href="https://lunastreams.net/" hreflang="x-default" rel="alternate"/>
+  <style>
+    /* Critical CSS to prevent logo flash */
+    .logo, .footer-logo {
+      display: inline-flex;
+      align-items: center;
+      line-height: 0;
+    }
+    .logo img, .footer-logo img {
+      display: block;
+      width: auto;
+      max-width: 100%;
+      height: 64px;
+    }
+    .footer-logo img {
+      height: 76px;
+    }
+    @media (max-width: 768px) {
+      .logo img, .footer-logo img {
+        height: 48px;
+      }
+    }
+  </style>
   <link as="style" href="styles.css" onload="this.onload=null;this.rel='stylesheet'" rel="preload"/>
   <noscript>
    <link href="styles.css" rel="stylesheet"/>
