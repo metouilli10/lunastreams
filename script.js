@@ -8,14 +8,16 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Check if user has already accepted cookies
     if (localStorage.getItem('cookiesAccepted')) {
-        cookieBanner.style.display = 'none';
+        cookieBanner.setAttribute('hidden', '');
+        document.documentElement.classList.add('cookies-accepted');
     }
 
     // Accept cookies
     if (cookieAccept) {
         cookieAccept.addEventListener('click', function() {
             localStorage.setItem('cookiesAccepted', 'true');
-            cookieBanner.style.display = 'none';
+            cookieBanner.setAttribute('hidden', '');
+            document.documentElement.classList.add('cookies-accepted');
         });
     }
 
@@ -23,7 +25,8 @@ document.addEventListener('DOMContentLoaded', function() {
     if (cookieClose) {
         cookieClose.addEventListener('click', function() {
             localStorage.setItem('cookiesAccepted', 'true');
-            cookieBanner.style.display = 'none';
+            cookieBanner.setAttribute('hidden', '');
+            document.documentElement.classList.add('cookies-accepted');
         });
     }
 });
@@ -197,11 +200,18 @@ document.querySelectorAll('.accordion-header').forEach(header => {
         let autoScrollInterval = null;
 
         const recalcMeasurements = () => {
+            // Batch all layout reads together to minimize forced reflows
             const computedStyles = getComputedStyle(track);
-            gapValue = parseFloat(computedStyles.gap || computedStyles.columnGap || '0') || 0;
-
             const visibleSlide = track.querySelector('.movie-slide');
-            slideWidth = visibleSlide ? visibleSlide.getBoundingClientRect().width : viewport.clientWidth;
+            
+            // Read all layout properties in one batch
+            const gap = computedStyles.gap || computedStyles.columnGap || '0';
+            const slideRect = visibleSlide ? visibleSlide.getBoundingClientRect() : null;
+            const viewportWidth = viewport.clientWidth;
+            
+            // Calculate values after all reads are complete
+            gapValue = parseFloat(gap) || 0;
+            slideWidth = slideRect ? slideRect.width : viewportWidth;
 
             scrollAmount = slideWidth + gapValue;
             totalOriginalWidth = (slideWidth * originalSlides.length) + gapValue * Math.max(0, originalSlides.length - 1);
@@ -228,9 +238,9 @@ document.querySelectorAll('.accordion-header').forEach(header => {
             track.appendChild(appendFragment);
             track.dataset.loopCloned = 'true';
 
-            recalcMeasurements();
-
+            // Defer measurements to avoid forced reflow after DOM writes
             requestAnimationFrame(() => {
+                recalcMeasurements();
                 viewport.scrollLeft = loopScrollOffset;
             });
         };
@@ -276,18 +286,29 @@ document.querySelectorAll('.accordion-header').forEach(header => {
 
         viewport.addEventListener('scroll', handleScroll, { passive: true });
 
+        // Debounce resize handler to prevent excessive forced reflows
+        let resizeTimeout = null;
         const handleResize = () => {
-            recalcMeasurements();
-            if (isLooping) {
-                isAdjustingLoop = true;
-                const remainder = viewport.scrollLeft % totalOriginalWidth;
-                viewport.scrollLeft = loopScrollOffset + (Number.isFinite(remainder) ? remainder : 0);
-                requestAnimationFrame(() => { isAdjustingLoop = false; });
+            // Clear any pending resize handler
+            if (resizeTimeout) {
+                cancelAnimationFrame(resizeTimeout);
             }
+            
+            // Defer measurements to avoid forced reflow
+            resizeTimeout = requestAnimationFrame(() => {
+                recalcMeasurements();
+                if (isLooping) {
+                    isAdjustingLoop = true;
+                    const remainder = viewport.scrollLeft % totalOriginalWidth;
+                    viewport.scrollLeft = loopScrollOffset + (Number.isFinite(remainder) ? remainder : 0);
+                    requestAnimationFrame(() => { isAdjustingLoop = false; });
+                }
+                resizeTimeout = null;
+            });
         };
 
-        window.addEventListener('resize', handleResize);
-        window.addEventListener('orientationchange', handleResize);
+        window.addEventListener('resize', handleResize, { passive: true });
+        window.addEventListener('orientationchange', handleResize, { passive: true });
 
         recalcMeasurements();
         cloneForLooping();

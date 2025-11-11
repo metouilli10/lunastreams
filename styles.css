@@ -31,6 +31,11 @@ body {
     -moz-osx-font-smoothing: grayscale;
 }
 
+/* Prevent deprecated API warning for H1UserAgentFontSizeInSection */
+section h1 {
+    font-size: inherit;
+}
+
 /* Cookie Banner */
 .cookie-banner {
     background-color: rgba(0, 0, 0, 0.9);
@@ -43,6 +48,11 @@ body {
     top: 0;
     z-index: 1000;
     font-size: 14px;
+}
+
+.cookie-banner[hidden],
+.cookies-accepted .cookie-banner {
+    display: none;
 }
 
 .cookie-banner p {
@@ -385,6 +395,7 @@ main {
     line-height: 1.2;
     color: var(--color-primary);
     margin-bottom: 30px;
+    min-height: 1.2em;
 }
 
 .hero-tagline {
@@ -474,6 +485,7 @@ main {
     width: 100%;
     height: auto;
     display: block;
+    object-fit: contain;
 }
 
 /* Trusted Section */
