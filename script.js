@@ -741,7 +741,7 @@ if ('IntersectionObserver' in window) {
             // Show error message
             if (messageEl) {
                 messageEl.classList.add('contact-form__status--error');
-                messageEl.textContent = 'Sorry, there was an error sending your message. Please try again or email us directly at support@lunastreams.com';
+                messageEl.textContent = 'Sorry, there was an error sending your message. Please try again or email us directly at lunastreamsau@gmail.com';
             }
 
             // Re-enable submit button
