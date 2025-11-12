@@ -5665,26 +5665,46 @@ main {
     }
 
     .contact-main {
-        gap: 50px;
-        padding: 60px 20px 80px;
+        gap: 40px;
+        padding: 50px 16px 60px;
+    }
+
+    .contact-hero {
+        gap: 20px;
+    }
+
+    .contact-hero__content {
+        gap: 14px;
     }
 
     .contact-hero__content h1 {
-        font-size: clamp(28px, 6vw, 36px);
+        font-size: clamp(24px, 5.5vw, 32px);
         line-height: 1.3;
     }
 
     .contact-hero__content p {
-        font-size: 16px;
-        line-height: 1.6;
+        font-size: 15px;
+        line-height: 1.5;
+    }
+
+    .contact-hero__panel {
+        gap: 12px;
     }
 
     .contact-hero__panel h2 {
-        font-size: 20px;
+        font-size: 18px;
+    }
+
+    .contact-hero__panel ul {
+        font-size: 14px;
+        gap: 8px;
+        padding-left: 18px;
     }
 
     .contact-hero__actions {
         flex-direction: column;
+        gap: 10px;
+        margin-top: 8px;
     }
 
     .contact-hero__actions .btn-primary,
@@ -5693,24 +5713,65 @@ main {
         justify-content: center;
     }
 
+    .contact-methods__grid {
+        gap: 16px;
+    }
+
+    .contact-method-card {
+        gap: 12px;
+    }
+
+    .contact-method-card h3 {
+        font-size: 18px;
+    }
+
+    .contact-method-card p {
+        font-size: 14px;
+    }
+
+    .contact-highlights__inner {
+        gap: 16px;
+    }
+
+    .contact-highlights__item {
+        gap: 8px;
+    }
+
+    .contact-highlights__item h3 {
+        font-size: 18px;
+    }
+
+    .contact-highlights__item p {
+        font-size: 14px;
+    }
+
     .contact-form__content h2 {
-        font-size: clamp(24px, 5vw, 28px);
+        font-size: clamp(22px, 5vw, 26px);
     }
 
     .contact-form__content p {
-        font-size: 15px;
+        font-size: 14px;
+    }
+
+    .contact-form__tips {
+        font-size: 13px;
+        gap: 8px;
+    }
+
+    .contact-form__fields {
+        gap: 14px;
     }
 
     .contact-section-intro h2 {
-        font-size: clamp(24px, 5vw, 32px);
+        font-size: clamp(22px, 5vw, 28px);
     }
 
     .contact-section-intro p {
-        font-size: 16px;
+        font-size: 15px;
     }
 
     .contact-faq .section-header {
-        margin-bottom: 32px;
+        margin-bottom: 24px;
     }
 
     .reseller-hero__panel h2 {
@@ -5926,8 +5987,12 @@ main {
     }
 
     .contact-main {
-        gap: 50px;
-        padding: 60px 20px 80px;
+        gap: 40px;
+        padding: 50px 16px 60px;
+    }
+
+    .contact-hero {
+        gap: 18px;
     }
 
     .contact-hero__content,
@@ -5935,15 +6000,31 @@ main {
     .contact-form__card,
     .contact-highlights__item,
     .contact-method-card {
-        padding: 28px 24px;
+        padding: 24px 20px;
+    }
+
+    .contact-hero__content {
+        gap: 12px;
+    }
+
+    .contact-hero__panel {
+        gap: 10px;
     }
 
     .contact-form__card {
-        gap: 24px;
+        gap: 20px;
     }
 
     .contact-form__content h2 {
-        font-size: clamp(22px, 5vw, 26px);
+        font-size: clamp(20px, 4.5vw, 24px);
+    }
+
+    .contact-methods__grid {
+        gap: 14px;
+    }
+
+    .contact-highlights__inner {
+        gap: 14px;
     }
 
     .form-group--inline {
@@ -5951,7 +6032,7 @@ main {
     }
 
     .contact-faq {
-        padding: 70px 20px 90px;
+        padding: 60px 16px 70px;
     }
 }
 
@@ -6103,78 +6184,131 @@ main {
     }
 
     .contact-main {
-        gap: 40px;
-        padding: 50px 16px 70px;
+        gap: 32px;
+        padding: 40px 12px 50px;
+    }
+
+    .contact-hero {
+        gap: 16px;
+    }
+
+    .contact-hero__content {
+        gap: 10px;
+        padding: 18px 16px;
     }
 
     .contact-hero__content h1 {
-        font-size: 26px;
+        font-size: 22px;
         line-height: 1.3;
     }
 
     .contact-hero__content p {
-        font-size: 15px;
-        line-height: 1.6;
+        font-size: 14px;
+        line-height: 1.5;
+    }
+
+    .contact-hero__panel {
+        gap: 10px;
+        padding: 18px 16px;
     }
 
     .contact-hero__panel h2 {
-        font-size: 18px;
+        font-size: 16px;
     }
 
-    .contact-hero__content,
-    .contact-hero__panel,
-    .contact-form__card,
-    .contact-method-card,
-    .contact-highlights__item {
-        padding: 20px 18px;
+    .contact-hero__panel ul {
+        font-size: 13px;
+        gap: 6px;
+        padding-left: 16px;
     }
 
-    .contact-form__card {
-        gap: 20px;
+    .contact-hero__actions {
+        gap: 8px;
+        margin-top: 6px;
     }
 
-    .contact-form__content h2 {
-        font-size: 22px;
+    .contact-methods__grid {
+        gap: 12px;
     }
 
-    .contact-form__content p {
-        font-size: 14px;
-    }
-
-    .contact-form__tips {
-        font-size: 14px;
-    }
-
-    .contact-section-intro h2 {
-        font-size: 22px;
-    }
-
-    .contact-section-intro p {
-        font-size: 15px;
-    }
-
-    .contact-faq .section-header {
-        margin-bottom: 24px;
+    .contact-method-card {
+        padding: 18px 16px;
+        gap: 10px;
     }
 
     .contact-method-card h3 {
-        font-size: 18px;
+        font-size: 16px;
     }
 
     .contact-method-card p {
-        font-size: 14px;
+        font-size: 13px;
+    }
+
+    .contact-highlights__inner {
+        gap: 12px;
+    }
+
+    .contact-highlights__item {
+        padding: 18px 16px;
+        gap: 8px;
     }
 
     .contact-highlights__item h3 {
-        font-size: 18px;
+        font-size: 16px;
     }
 
     .contact-highlights__item p {
+        font-size: 13px;
+    }
+
+    .contact-form__card {
+        padding: 18px 16px;
+        gap: 16px;
+    }
+
+    .contact-form__content h2 {
+        font-size: 20px;
+    }
+
+    .contact-form__content p {
+        font-size: 13px;
+    }
+
+    .contact-form__tips {
+        font-size: 12px;
+        gap: 6px;
+        padding-left: 16px;
+    }
+
+    .contact-form__fields {
+        gap: 12px;
+    }
+
+    .form-group label {
+        font-size: 12px;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+        padding: 12px 14px;
+        font-size: 15px;
+    }
+
+    .contact-section-intro h2 {
+        font-size: 20px;
+    }
+
+    .contact-section-intro p {
         font-size: 14px;
     }
 
+    .contact-faq .section-header {
+        margin-bottom: 20px;
+    }
+
     .contact-faq {
-        padding: 60px 16px 80px;
+        padding: 50px 12px 60px;
     }
 }
 
