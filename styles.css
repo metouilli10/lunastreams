@@ -446,6 +446,7 @@ main {
     transition: background 0.3s ease, transform 0.3s ease, color 0.3s ease;
     width: fit-content;
     box-shadow: 0 18px 40px rgba(14, 165, 233, 0.25);
+    box-sizing: border-box;
 }
 
 .btn-primary:hover {
@@ -466,6 +467,7 @@ main {
     text-align: center;
     transition: background 0.3s ease, color 0.3s ease, transform 0.3s ease;
     width: fit-content;
+    box-sizing: border-box;
 }
 
 .btn-secondary:hover {
@@ -5379,6 +5381,8 @@ main {
     display: grid;
     gap: 16px;
     box-shadow: 0 18px 34px rgba(15, 23, 42, 0.08);
+    box-sizing: border-box;
+    overflow: hidden;
 }
 
 .contact-method-card h3 {
@@ -5390,6 +5394,8 @@ main {
 .contact-method-card p {
     margin: 0;
     color: var(--color-gray);
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 }
 
 .contact-method-card__meta {
@@ -5409,10 +5415,17 @@ main {
     color: var(--color-gray);
 }
 
+.contact-method-card__list li {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
 .contact-method-card__link {
     font-weight: 600;
     color: var(--color-primary);
     text-decoration: none;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 }
 
 .contact-method-card__link:hover {
@@ -5435,6 +5448,8 @@ main {
     box-shadow: 0 18px 34px rgba(15, 23, 42, 0.08);
     display: grid;
     gap: 10px;
+    box-sizing: border-box;
+    overflow: hidden;
 }
 
 .contact-highlights__item h3 {
@@ -5446,6 +5461,8 @@ main {
 .contact-highlights__item p {
     margin: 0;
     color: var(--color-gray);
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 }
 
 .contact-form__card {
@@ -5460,6 +5477,8 @@ main {
     grid-template-columns: minmax(0, 420px) minmax(0, 1fr);
     align-items: start;
     box-shadow: 0 28px 55px rgba(15, 23, 42, 0.1);
+    box-sizing: border-box;
+    width: 100%;
 }
 
 .contact-form__content h2 {
@@ -5484,11 +5503,15 @@ main {
 .contact-form__fields {
     display: grid;
     gap: 18px;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .form-group {
     display: grid;
     gap: 8px;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .form-group label {
@@ -5503,6 +5526,7 @@ main {
 .form-group select,
 .form-group textarea {
     width: 100%;
+    box-sizing: border-box;
     border: 1px solid rgba(15, 23, 42, 0.12);
     border-radius: 14px;
     padding: 14px 16px;
@@ -5681,7 +5705,7 @@ main {
 
     .contact-main {
         gap: 40px;
-        padding: 50px 16px 60px;
+        padding: 50px 20px 60px;
         width: 100%;
         max-width: 100%;
         box-sizing: border-box;
@@ -5699,6 +5723,8 @@ main {
         gap: 14px;
         max-width: 100%;
         overflow: hidden;
+        padding: 28px 20px;
+        box-sizing: border-box;
     }
 
     .contact-hero__content h1 {
@@ -5727,6 +5753,8 @@ main {
 
     .contact-hero__panel {
         gap: 12px;
+        padding: 28px 20px;
+        box-sizing: border-box;
     }
 
     .contact-hero__panel h2 {
@@ -5749,14 +5777,18 @@ main {
     .contact-hero__actions .btn-secondary {
         width: 100%;
         justify-content: center;
+        box-sizing: border-box;
     }
 
     .contact-methods__grid {
         gap: 16px;
+        grid-template-columns: 1fr;
     }
 
     .contact-method-card {
         gap: 12px;
+        padding: 24px 20px;
+        box-sizing: border-box;
     }
 
     .contact-method-card h3 {
@@ -5769,10 +5801,13 @@ main {
 
     .contact-highlights__inner {
         gap: 16px;
+        grid-template-columns: 1fr;
     }
 
     .contact-highlights__item {
         gap: 8px;
+        padding: 24px 20px;
+        box-sizing: border-box;
     }
 
     .contact-highlights__item h3 {
@@ -5781,6 +5816,11 @@ main {
 
     .contact-highlights__item p {
         font-size: 14px;
+    }
+
+    .contact-form__card {
+        padding: 28px 20px;
+        box-sizing: border-box;
     }
 
     .contact-form__content h2 {
@@ -5800,12 +5840,25 @@ main {
         gap: 14px;
     }
 
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+        width: 100%;
+        box-sizing: border-box;
+        padding: 12px 14px;
+        font-size: 15px;
+    }
+
     .contact-section-intro h2 {
         font-size: clamp(22px, 5vw, 28px);
     }
 
     .contact-section-intro p {
         font-size: 15px;
+    }
+
+    .contact-faq {
+        padding: 60px 20px 70px;
     }
 
     .contact-faq .section-header {
@@ -6026,11 +6079,17 @@ main {
 
     .contact-main {
         gap: 40px;
-        padding: 50px 16px 60px;
+        padding: 50px 18px 60px;
+        box-sizing: border-box;
+        width: 100%;
+        max-width: 100%;
     }
 
     .contact-hero {
         gap: 18px;
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
     }
 
     .contact-hero__content,
@@ -6038,11 +6097,14 @@ main {
     .contact-form__card,
     .contact-highlights__item,
     .contact-method-card {
-        padding: 24px 20px;
+        padding: 22px 18px;
+        box-sizing: border-box;
     }
 
     .contact-hero__content {
         gap: 12px;
+        max-width: 100%;
+        overflow: hidden;
     }
 
     .contact-hero__panel {
@@ -6059,18 +6121,29 @@ main {
 
     .contact-methods__grid {
         gap: 14px;
+        grid-template-columns: 1fr;
     }
 
     .contact-highlights__inner {
         gap: 14px;
+        grid-template-columns: 1fr;
     }
 
     .form-group--inline {
         grid-template-columns: 1fr;
     }
 
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+        width: 100%;
+        box-sizing: border-box;
+        padding: 12px 14px;
+        font-size: 15px;
+    }
+
     .contact-faq {
-        padding: 60px 16px 70px;
+        padding: 60px 18px 70px;
     }
 }
 
@@ -6222,8 +6295,8 @@ main {
     }
 
     .contact-main {
-        gap: 32px;
-        padding: 40px 12px 50px;
+        gap: 30px;
+        padding: 35px 16px 45px;
         width: 100%;
         max-width: 100%;
         box-sizing: border-box;
@@ -6231,7 +6304,7 @@ main {
     }
 
     .contact-hero {
-        gap: 16px;
+        gap: 14px;
         width: 100%;
         max-width: 100%;
         box-sizing: border-box;
@@ -6239,7 +6312,7 @@ main {
 
     .contact-hero__content {
         gap: 10px;
-        padding: 18px 16px;
+        padding: 20px 16px;
         max-width: 100%;
         overflow: hidden;
         box-sizing: border-box;
@@ -6266,6 +6339,7 @@ main {
     }
 
     .contact-hero__content .eyebrow {
+        font-size: 12px;
         word-wrap: break-word;
         overflow-wrap: break-word;
         max-width: 100%;
@@ -6274,7 +6348,8 @@ main {
 
     .contact-hero__panel {
         gap: 10px;
-        padding: 18px 16px;
+        padding: 20px 16px;
+        box-sizing: border-box;
     }
 
     .contact-hero__panel h2 {
@@ -6292,13 +6367,23 @@ main {
         margin-top: 6px;
     }
 
+    .contact-hero__actions .btn-primary,
+    .contact-hero__actions .btn-secondary {
+        width: 100%;
+        box-sizing: border-box;
+        padding: 14px 20px;
+        font-size: 14px;
+    }
+
     .contact-methods__grid {
         gap: 12px;
+        grid-template-columns: 1fr;
     }
 
     .contact-method-card {
-        padding: 18px 16px;
+        padding: 20px 16px;
         gap: 10px;
+        box-sizing: border-box;
     }
 
     .contact-method-card h3 {
@@ -6311,11 +6396,13 @@ main {
 
     .contact-highlights__inner {
         gap: 12px;
+        grid-template-columns: 1fr;
     }
 
     .contact-highlights__item {
-        padding: 18px 16px;
+        padding: 20px 16px;
         gap: 8px;
+        box-sizing: border-box;
     }
 
     .contact-highlights__item h3 {
@@ -6327,8 +6414,9 @@ main {
     }
 
     .contact-form__card {
-        padding: 18px 16px;
-        gap: 16px;
+        padding: 20px 16px;
+        gap: 18px;
+        box-sizing: border-box;
     }
 
     .contact-form__content h2 {
@@ -6349,6 +6437,11 @@ main {
         gap: 12px;
     }
 
+    .form-group {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
     .form-group label {
         font-size: 12px;
     }
@@ -6356,8 +6449,14 @@ main {
     .form-group input,
     .form-group select,
     .form-group textarea {
+        width: 100%;
+        box-sizing: border-box;
         padding: 12px 14px;
         font-size: 15px;
+    }
+
+    .contact-section-intro {
+        padding: 0 4px;
     }
 
     .contact-section-intro h2 {
@@ -6373,7 +6472,7 @@ main {
     }
 
     .contact-faq {
-        padding: 50px 12px 60px;
+        padding: 45px 16px 55px;
     }
 }
 
