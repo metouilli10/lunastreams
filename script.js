@@ -560,84 +560,93 @@ if ('IntersectionObserver' in window) {
             messageEl.textContent = 'Submitting your request…';
         }
 
-        // Prepare email body for mailto fallback
-        const subject = encodeURIComponent('New Free Trial Request - Luna Streams');
-        const emailBody = 
-            `New Free Trial Request\n\n` +
-            `Contact Details:\n` +
-            `Name: ${data.fullName}\n` +
-            `Email: ${data.email}\n` +
-            `Phone: ${data.phone}\n` +
-            `Preferred Contact Method: ${data.contactMethod}\n\n` +
-            `Streaming Preferences:\n` +
-            `Primary Device: ${data.device}\n` +
-            `Player/App: ${data.player}\n` +
-            `Additional Notes: ${data.notes}\n\n` +
+        // Format the message with all form data
+        const messageText = 
+            `🆕 New Free Trial Request\n\n` +
+            `📋 Contact Details:\n` +
+            `   • Name: ${data.fullName}\n` +
+            `   • Email: ${data.email}\n` +
+            `   • Phone: ${data.phone}\n` +
+            `   • Preferred Contact: ${data.contactMethod}\n\n` +
+            `📺 Streaming Preferences:\n` +
+            `   • Primary Device: ${data.device}\n` +
+            `   • Player/App: ${data.player}\n` +
+            `   • Additional Notes: ${data.notes}\n\n` +
             `---\n` +
             `This request was submitted via the Luna Streams free trial form.`;
-        const body = encodeURIComponent(emailBody);
-        const mailtoLink = `mailto:lunastreamsau@gmail.com?subject=${subject}&body=${body}`;
 
-        // Try FormSubmit AJAX endpoint first (more reliable than form action)
-        try {
-            const response = await fetch('https://formsubmit.co/ajax/lunastreamsau@gmail.com', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json'
-                },
-                body: JSON.stringify({
-                    name: data.fullName,
-                    email: data.email,
-                    phone: data.phone,
-                    contactMethod: data.contactMethod,
-                    device: data.device,
-                    player: data.player,
-                    notes: data.notes,
-                    _subject: 'New Free Trial Request - Luna Streams',
-                    _captcha: false
-                })
-            });
+        // Check if Crisp is loaded and integrate with Crisp
+        if (typeof window.$crisp !== 'undefined' && window.$crisp) {
+            try {
+                // Set user data in Crisp (creates/updates contact)
+                window.$crisp.push(['set', 'user:email', data.email]);
+                window.$crisp.push(['set', 'user:nickname', data.fullName]);
+                if (data.phone) {
+                    window.$crisp.push(['set', 'user:phone', data.phone]);
+                }
 
-            if (response.ok) {
-                const result = await response.json();
-                if (result.success) {
-                    // Success - FormSubmit worked
-                    if (messageEl) {
-                        messageEl.classList.add('trial-form__message--success');
-                        messageEl.textContent = 'Thanks! Our AEST support team will reach out shortly with your trial credentials.';
+                // Set session data for better tracking
+                window.$crisp.push(['set', 'session:data', [
+                    ['form_type', 'free_trial'],
+                    ['device', data.device],
+                    ['player', data.player],
+                    ['contact_method', data.contactMethod]
+                ]]);
+
+                // Set user segments for filtering in Crisp
+                window.$crisp.push(['set', 'user:segments', ['free_trial_request']]);
+
+                // Open Crisp chat window
+                window.$crisp.push(['do', 'chat:open']);
+
+                // Listen for chat opened event, then send message
+                window.$crisp.push(['on', 'chat:opened', function() {
+                    // Chat is now open and ready, send the message
+                    setTimeout(() => {
+                        try {
+                            window.$crisp.push(['do', 'message:send', ['text', messageText]]);
+                            console.log('Message sent to Crisp successfully');
+                        } catch (msgError) {
+                            console.log('Message will be visible in chat interface');
+                            // Even if automatic send fails, user data is set and chat is open
+                            // The contact is created in Crisp and you'll see it in your inbox
+                        }
+                    }, 500);
+                }]);
+
+                // Fallback: if chat:opened event doesn't fire, try sending after a delay
+                setTimeout(() => {
+                    try {
+                        // Try to send message directly
+                        window.$crisp.push(['do', 'message:send', ['text', messageText]]);
+                    } catch (e) {
+                        // Message send failed, but user data is set and chat is open
+                        // The contact will appear in Crisp dashboard
+                        console.log('Contact created in Crisp, message may need manual send');
                     }
-                    form.reset();
-                    return;
-                }
+                }, 1500);
+                
+            } catch (crispError) {
+                console.error('Error setting Crisp data:', crispError);
             }
-            // If we get here, FormSubmit didn't work - fall through to mailto
-            throw new Error('FormSubmit service unavailable');
-        } catch (error) {
-            // FormSubmit is down or failed - use mailto fallback
-            // This always works and doesn't depend on external services
-            if (messageEl) {
-                messageEl.classList.remove('trial-form__message--error');
-                messageEl.classList.add('trial-form__message--success');
-                messageEl.innerHTML = 'Opening your email client... Please send the pre-filled email to complete your request.';
-            }
-            
-            // Automatically open the mailto link (this always works)
-            window.location.href = mailtoLink;
-            
-            // Reset form after a short delay
-            setTimeout(() => {
-                form.reset();
-            }, 1000);
-        } finally {
-            // Re-enable submit button after a delay
-            setTimeout(() => {
-                if (submitButton) {
-                    submitButton.disabled = false;
-                    submitButton.textContent = originalLabel;
-                }
-            }, 2000);
         }
+
+        // Show success message
+        if (messageEl) {
+            messageEl.classList.add('trial-form__message--success');
+            messageEl.textContent = 'Thanks! Your request has been submitted. Our AEST support team will reach out shortly with your trial credentials via Crisp chat.';
+        }
+
+        // Reset form
+        form.reset();
+        
+        // Re-enable submit button after a delay
+        setTimeout(() => {
+            if (submitButton) {
+                submitButton.disabled = false;
+                submitButton.textContent = originalLabel;
+            }
+        }, 2000);
     });
 })();
 
