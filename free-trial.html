@@ -127,7 +127,7 @@
                 <h2 id="trial-form-title">Request your free trial</h2>
                 <p>Complete the form below so we can tailor your experience. The more detail you provide, the faster we can activate your trial.</p>
             </div>
-            <form class="trial-form" id="trial-request-form" novalidate>
+            <form class="trial-form" id="trial-request-form" action="https://formsubmit.co/lunastreamsau@gmail.com" method="POST" novalidate>
                 <fieldset class="trial-fieldset">
                     <legend>Contact details</legend>
                     <div class="trial-form__grid">
@@ -184,10 +184,16 @@
 
                 <div class="trial-form__actions">
                     <button type="submit" class="btn-primary trial-submit">Request Trial Access</button>
-                    <p class="trial-disclaimer">We respond within AEST hours. No payment required — we’ll send upgrade options after your trial if you’re happy.</p>
+                    <p class="trial-disclaimer">We respond within AEST hours. No payment required — we'll send upgrade options after your trial if you're happy.</p>
                 </div>
 
                 <p class="trial-form__message" id="trial-form-message" role="status" aria-live="polite"></p>
+                
+                <!-- FormSubmit hidden fields -->
+                <input type="hidden" name="_subject" value="New Free Trial Request - Luna Streams">
+                <input type="hidden" name="_next" value="https://lunastreams.net/free-trial.html?success=true">
+                <input type="hidden" name="_captcha" value="false">
+                <input type="hidden" name="_template" value="box">
             </form>
         </section>
 

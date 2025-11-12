@@ -518,10 +518,22 @@ if ('IntersectionObserver' in window) {
     const submitButton = form.querySelector('.trial-submit');
     const originalLabel = submitButton?.textContent || 'Submit';
 
-    form.addEventListener('submit', event => {
-        event.preventDefault();
+    // Check if form was submitted successfully (from URL parameter)
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('success') === 'true') {
+        if (messageEl) {
+            messageEl.classList.add('trial-form__message--success');
+            messageEl.textContent = 'Thanks! Our AEST support team will reach out shortly with your trial credentials.';
+        }
+        // Clean up URL
+        window.history.replaceState({}, document.title, window.location.pathname);
+    }
 
+    form.addEventListener('submit', event => {
+        // Let the form submit naturally to FormSubmit
+        // We'll show a loading state while it's submitting
         if (!form.checkValidity()) {
+            event.preventDefault();
             form.reportValidity?.();
             return;
         }
@@ -536,19 +548,8 @@ if ('IntersectionObserver' in window) {
             messageEl.textContent = 'Submitting your request…';
         }
 
-        setTimeout(() => {
-            if (submitButton) {
-                submitButton.disabled = false;
-                submitButton.textContent = originalLabel;
-            }
-
-            if (messageEl) {
-                messageEl.classList.add('trial-form__message--success');
-                messageEl.textContent = 'Thanks! Our AEST support team will reach out shortly with your trial credentials.';
-            }
-
-            form.reset();
-        }, 1200);
+        // Form will submit to FormSubmit, which will redirect to the success page
+        // No need to preventDefault or reset the form
     });
 })();
 
