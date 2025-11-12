@@ -581,26 +581,6 @@ if ('IntersectionObserver' in window) {
             messageEl.textContent = 'Submitting your request…';
         }
 
-        // Update Crisp user data if Crisp is loaded
-        if (typeof window.$crisp !== 'undefined' && window.$crisp) {
-            try {
-                window.$crisp.push(['set', 'user:email', data.email]);
-                window.$crisp.push(['set', 'user:nickname', data.name]);
-                if (data.phone) {
-                    window.$crisp.push(['set', 'user:phone', data.phone]);
-                }
-                window.$crisp.push(['set', 'session:data', [
-                    ['form_type', 'free_trial'],
-                    ['device', data.device],
-                    ['player', data.player],
-                    ['contact_method', data.contactMethod]
-                ]]);
-                window.$crisp.push(['set', 'user:segments', ['free_trial_request']]);
-            } catch (crispError) {
-                console.error('Error setting Crisp data:', crispError);
-            }
-        }
-
         // Create new FormData with updated message field
         const submitFormData = new FormData(form);
         // Ensure message is included (in case the hidden field wasn't updated)
