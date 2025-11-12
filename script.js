@@ -607,7 +607,7 @@ if ('IntersectionObserver' in window) {
 
                 // Redirect to success page (Web3Forms redirect should handle this)
                 // But we'll also handle it client-side as a backup
-                setTimeout(() => {
+        setTimeout(() => {
                     window.location.href = 'https://lunastreams.net/free-trial.html?success=true';
                 }, 1500);
             } else {
@@ -620,6 +620,129 @@ if ('IntersectionObserver' in window) {
             if (messageEl) {
                 messageEl.classList.add('trial-form__message--error');
                 messageEl.textContent = 'Sorry, there was an error submitting your request. Please try again or contact us directly.';
+            }
+
+            // Re-enable submit button
+            if (submitButton) {
+                submitButton.disabled = false;
+                submitButton.textContent = originalLabel;
+            }
+        }
+    });
+})();
+
+// Contact form handling with Web3Forms
+(function initContactForm() {
+    const form = document.getElementById('contact-form-submit');
+    if (!form) return;
+
+    const messageEl = document.getElementById('contact-form-status');
+    const submitButton = document.getElementById('contact-submit-btn');
+    const originalLabel = submitButton?.textContent || 'Submit';
+    const formattedMessageField = document.getElementById('contact-formatted-message');
+
+    // Check if form was submitted successfully (from URL parameter)
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('success') === 'true') {
+        if (messageEl) {
+            messageEl.classList.add('contact-form__status--success');
+            messageEl.textContent = 'Thanks! Your message has been sent. We\'ll respond within 4 hours during AEST hours.';
+        }
+        // Clean up URL
+        window.history.replaceState({}, document.title, window.location.pathname);
+    }
+
+    form.addEventListener('submit', async event => {
+        event.preventDefault();
+
+        if (!form.checkValidity()) {
+            form.reportValidity?.();
+            return;
+        }
+
+        // Get form data
+        const formData = new FormData(form);
+        const data = {
+            name: formData.get('name'),
+            email: formData.get('email'),
+            topic: formData.get('topic'),
+            message: formData.get('message'),
+            resellerRequest: formData.get('reseller-panel-request') === 'on' ? 'Yes' : 'No',
+            subscribeUpdates: formData.get('subscribe-updates') === 'on' ? 'Yes' : 'No'
+        };
+
+        // Format the message with all form data for Web3Forms
+        const topicLabels = {
+            'customer-support': 'Customer Support',
+            'billing': 'Billing or Renewals',
+            'reseller': 'Reseller Enquiry',
+            'technical': 'Technical Issue',
+            'other': 'Other'
+        };
+
+        // Format the complete message with all form data
+        const messageText = 
+            `📧 New Contact Request\n\n` +
+            `👤 Contact Details:\n` +
+            `   • Name: ${data.name}\n` +
+            `   • Email: ${data.email}\n` +
+            `   • Topic: ${topicLabels[data.topic] || data.topic}\n\n` +
+            `💬 Message:\n${data.message}\n\n` +
+            `📋 Additional Options:\n` +
+            `   • Reseller Panel Request: ${data.resellerRequest}\n` +
+            `   • Subscribe to Updates: ${data.subscribeUpdates}\n\n` +
+            `---\n` +
+            `This message was submitted via the Luna Streams contact form.`;
+
+        // Show loading state
+        if (submitButton) {
+            submitButton.disabled = true;
+            submitButton.textContent = 'Sending...';
+        }
+
+        if (messageEl) {
+            messageEl.classList.remove('contact-form__status--success', 'contact-form__status--error');
+            messageEl.textContent = 'Sending your message…';
+        }
+
+        // Create new FormData and update message field with formatted content
+        const submitFormData = new FormData(form);
+        // Replace message field with formatted version that includes all details
+        submitFormData.set('message', messageText);
+
+        // Submit form to Web3Forms
+        try {
+            const response = await fetch(form.action, {
+                method: 'POST',
+                body: submitFormData
+            });
+
+            const result = await response.json();
+
+            if (result.success) {
+                // Success - Web3Forms received the submission
+                if (messageEl) {
+                    messageEl.classList.add('contact-form__status--success');
+                    messageEl.textContent = 'Thanks! Your message has been sent. We\'ll respond within 4 hours during AEST hours.';
+                }
+
+                // Reset form
+                form.reset();
+
+                // Redirect to success page
+                setTimeout(() => {
+                    window.location.href = 'https://lunastreams.net/contact.html?success=true';
+                }, 1500);
+            } else {
+                throw new Error(result.message || 'Form submission failed');
+            }
+        } catch (error) {
+            console.error('Error submitting contact form:', error);
+            
+            // Show error message
+            if (messageEl) {
+                messageEl.classList.add('contact-form__status--error');
+                messageEl.textContent = 'Sorry, there was an error sending your message. Please try again or email us directly at support@lunastreams.com';
             }
 
             // Re-enable submit button
