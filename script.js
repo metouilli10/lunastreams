@@ -639,7 +639,6 @@ if ('IntersectionObserver' in window) {
     const messageEl = document.getElementById('contact-form-status');
     const submitButton = document.getElementById('contact-submit-btn');
     const originalLabel = submitButton?.textContent || 'Submit';
-    const formattedMessageField = document.getElementById('contact-formatted-message');
 
     // Check if form was submitted successfully (from URL parameter)
     const urlParams = new URLSearchParams(window.location.search);
