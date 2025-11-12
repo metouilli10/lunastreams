@@ -5,6 +5,11 @@
     box-sizing: border-box;
 }
 
+/* Ensure script and style tags are never displayed */
+script, style {
+    display: none !important;
+}
+
 :root {
     --color-primary: #0F172A;
     --color-text: #1E293B;
