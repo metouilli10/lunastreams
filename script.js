@@ -509,7 +509,7 @@ if ('IntersectionObserver' in window) {
     }
 })();
 
-// Free trial form handling
+// Free trial form handling with Web3Forms
 (function initTrialForm() {
     const form = document.getElementById('trial-request-form');
     if (!form) return;
@@ -517,6 +517,7 @@ if ('IntersectionObserver' in window) {
     const messageEl = document.getElementById('trial-form-message');
     const submitButton = form.querySelector('.trial-submit');
     const originalLabel = submitButton?.textContent || 'Submit';
+    const messageField = document.getElementById('trial-message');
 
     // Check if form was submitted successfully (from URL parameter)
     const urlParams = new URLSearchParams(window.location.search);
@@ -540,7 +541,7 @@ if ('IntersectionObserver' in window) {
         // Get form data
         const formData = new FormData(form);
         const data = {
-            fullName: formData.get('fullName'),
+            name: formData.get('name'),
             email: formData.get('email'),
             phone: formData.get('phone'),
             contactMethod: formData.get('contactMethod'),
@@ -548,6 +549,26 @@ if ('IntersectionObserver' in window) {
             player: formData.get('player') || 'Not specified',
             notes: formData.get('notes') || 'None'
         };
+
+        // Format the message with all form data for Web3Forms
+        const messageText = 
+            `🆕 New Free Trial Request\n\n` +
+            `📋 Contact Details:\n` +
+            `   • Name: ${data.name}\n` +
+            `   • Email: ${data.email}\n` +
+            `   • Phone: ${data.phone}\n` +
+            `   • Preferred Contact: ${data.contactMethod}\n\n` +
+            `📺 Streaming Preferences:\n` +
+            `   • Primary Device: ${data.device}\n` +
+            `   • Player/App: ${data.player}\n` +
+            `   • Additional Notes: ${data.notes}\n\n` +
+            `---\n` +
+            `This request was submitted via the Luna Streams free trial form.`;
+
+        // Set the message field value before submitting
+        if (messageField) {
+            messageField.value = messageText;
+        }
 
         // Show loading state
         if (submitButton) {
@@ -560,93 +581,73 @@ if ('IntersectionObserver' in window) {
             messageEl.textContent = 'Submitting your request…';
         }
 
-        // Format the message with all form data
-        const messageText = 
-            `🆕 New Free Trial Request\n\n` +
-            `📋 Contact Details:\n` +
-            `   • Name: ${data.fullName}\n` +
-            `   • Email: ${data.email}\n` +
-            `   • Phone: ${data.phone}\n` +
-            `   • Preferred Contact: ${data.contactMethod}\n\n` +
-            `📺 Streaming Preferences:\n` +
-            `   • Primary Device: ${data.device}\n` +
-            `   • Player/App: ${data.player}\n` +
-            `   • Additional Notes: ${data.notes}\n\n` +
-            `---\n` +
-            `This request was submitted via the Luna Streams free trial form.`;
-
-        // Check if Crisp is loaded and integrate with Crisp
+        // Update Crisp user data if Crisp is loaded
         if (typeof window.$crisp !== 'undefined' && window.$crisp) {
             try {
-                // Set user data in Crisp (creates/updates contact)
                 window.$crisp.push(['set', 'user:email', data.email]);
-                window.$crisp.push(['set', 'user:nickname', data.fullName]);
+                window.$crisp.push(['set', 'user:nickname', data.name]);
                 if (data.phone) {
                     window.$crisp.push(['set', 'user:phone', data.phone]);
                 }
-
-                // Set session data for better tracking
                 window.$crisp.push(['set', 'session:data', [
                     ['form_type', 'free_trial'],
                     ['device', data.device],
                     ['player', data.player],
                     ['contact_method', data.contactMethod]
                 ]]);
-
-                // Set user segments for filtering in Crisp
                 window.$crisp.push(['set', 'user:segments', ['free_trial_request']]);
-
-                // Open Crisp chat window
-                window.$crisp.push(['do', 'chat:open']);
-
-                // Listen for chat opened event, then send message
-                window.$crisp.push(['on', 'chat:opened', function() {
-                    // Chat is now open and ready, send the message
-                    setTimeout(() => {
-                        try {
-                            window.$crisp.push(['do', 'message:send', ['text', messageText]]);
-                            console.log('Message sent to Crisp successfully');
-                        } catch (msgError) {
-                            console.log('Message will be visible in chat interface');
-                            // Even if automatic send fails, user data is set and chat is open
-                            // The contact is created in Crisp and you'll see it in your inbox
-                        }
-                    }, 500);
-                }]);
-
-                // Fallback: if chat:opened event doesn't fire, try sending after a delay
-                setTimeout(() => {
-                    try {
-                        // Try to send message directly
-                        window.$crisp.push(['do', 'message:send', ['text', messageText]]);
-                    } catch (e) {
-                        // Message send failed, but user data is set and chat is open
-                        // The contact will appear in Crisp dashboard
-                        console.log('Contact created in Crisp, message may need manual send');
-                    }
-                }, 1500);
-                
             } catch (crispError) {
                 console.error('Error setting Crisp data:', crispError);
             }
         }
 
-        // Show success message
-        if (messageEl) {
-            messageEl.classList.add('trial-form__message--success');
-            messageEl.textContent = 'Thanks! Your request has been submitted. Our AEST support team will reach out shortly with your trial credentials via Crisp chat.';
-        }
+        // Create new FormData with updated message field
+        const submitFormData = new FormData(form);
+        // Ensure message is included (in case the hidden field wasn't updated)
+        submitFormData.set('message', messageText);
 
-        // Reset form
-        form.reset();
-        
-        // Re-enable submit button after a delay
-        setTimeout(() => {
+        // Submit form to Web3Forms
+        try {
+            const response = await fetch(form.action, {
+                method: 'POST',
+                body: submitFormData
+            });
+
+            const result = await response.json();
+
+            if (result.success) {
+                // Success - Web3Forms received the submission
+                if (messageEl) {
+                    messageEl.classList.add('trial-form__message--success');
+                    messageEl.textContent = 'Thanks! Your request has been submitted. Our AEST support team will reach out shortly with your trial credentials.';
+                }
+
+                // Reset form
+                form.reset();
+
+                // Redirect to success page (Web3Forms redirect should handle this)
+                // But we'll also handle it client-side as a backup
+                setTimeout(() => {
+                    window.location.href = 'https://lunastreams.net/free-trial.html?success=true';
+                }, 1500);
+            } else {
+                throw new Error(result.message || 'Form submission failed');
+            }
+        } catch (error) {
+            console.error('Error submitting form:', error);
+            
+            // Show error message
+            if (messageEl) {
+                messageEl.classList.add('trial-form__message--error');
+                messageEl.textContent = 'Sorry, there was an error submitting your request. Please try again or contact us directly.';
+            }
+
+            // Re-enable submit button
             if (submitButton) {
                 submitButton.disabled = false;
                 submitButton.textContent = originalLabel;
             }
-        }, 2000);
+        }
     });
 })();
 
