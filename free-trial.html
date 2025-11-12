@@ -127,25 +127,25 @@
                 <h2 id="trial-form-title">Request your free trial</h2>
                 <p>Complete the form below so we can tailor your experience. The more detail you provide, the faster we can activate your trial.</p>
             </div>
-            <form class="trial-form" id="trial-request-form" action="https://formsubmit.co/lunastreamsau@gmail.com" method="POST" novalidate>
+            <form class="trial-form" id="trial-request-form" novalidate>
                 <fieldset class="trial-fieldset">
                     <legend>Contact details</legend>
                     <div class="trial-form__grid">
                         <label class="trial-field">
                             <span>Full name <span aria-hidden="true">*</span></span>
-                            <input type="text" name="fullName" autocomplete="name" required placeholder="Alex Johnson">
+                            <input type="text" name="fullName" id="trial-fullName" autocomplete="name" required placeholder="Alex Johnson">
                         </label>
                         <label class="trial-field">
                             <span>Email address <span aria-hidden="true">*</span></span>
-                            <input type="email" name="email" autocomplete="email" required placeholder="alex@email.com">
+                            <input type="email" name="email" id="trial-email" autocomplete="email" required placeholder="alex@email.com">
                         </label>
                         <label class="trial-field">
                             <span>Mobile number <span aria-hidden="true">*</span></span>
-                            <input type="tel" name="phone" autocomplete="tel" required placeholder="Enter your phone number">
+                            <input type="tel" name="phone" id="trial-phone" autocomplete="tel" required placeholder="Enter your phone number">
                         </label>
                         <label class="trial-field">
                             <span>Preferred contact channel</span>
-                            <select name="contactMethod">
+                            <select name="contactMethod" id="trial-contactMethod">
                                 <option value="email" selected>Email</option>
                                 <option value="phone">Phone call</option>
                                 <option value="telegram">Telegram</option>
@@ -160,7 +160,7 @@
                     <div class="trial-form__grid">
                         <label class="trial-field">
                             <span>Primary device <span aria-hidden="true">*</span></span>
-                            <select name="device" required>
+                            <select name="device" id="trial-device" required>
                                 <option value="" disabled selected>Select a device</option>
                                 <option value="smart-tv">Smart TV (Samsung, LG)</option>
                                 <option value="fire-tv">Amazon Fire TV / Firestick</option>
@@ -173,12 +173,12 @@
                         </label>
                         <label class="trial-field">
                             <span>App / player you plan to use</span>
-                            <input type="text" name="player" placeholder="e.g. TiviMate, IPTV Smarters, SmartSTB">
+                            <input type="text" name="player" id="trial-player" placeholder="e.g. TiviMate, IPTV Smarters, SmartSTB">
                         </label>
                     </div>
                     <label class="trial-field">
                         <span>Tell us anything else that will help (optional)</span>
-                        <textarea name="notes" rows="4" placeholder="Desired channel packs, setup availability, best time to reach you…"></textarea>
+                        <textarea name="notes" id="trial-notes" rows="4" placeholder="Desired channel packs, setup availability, best time to reach you…"></textarea>
                     </label>
                 </fieldset>
 
@@ -188,12 +188,6 @@
                 </div>
 
                 <p class="trial-form__message" id="trial-form-message" role="status" aria-live="polite"></p>
-                
-                <!-- FormSubmit hidden fields -->
-                <input type="hidden" name="_subject" value="New Free Trial Request - Luna Streams">
-                <input type="hidden" name="_next" value="https://lunastreams.net/free-trial.html?success=true">
-                <input type="hidden" name="_captcha" value="false">
-                <input type="hidden" name="_template" value="box">
             </form>
         </section>
 

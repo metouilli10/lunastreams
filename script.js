@@ -529,15 +529,27 @@ if ('IntersectionObserver' in window) {
         window.history.replaceState({}, document.title, window.location.pathname);
     }
 
-    form.addEventListener('submit', event => {
-        // Let the form submit naturally to FormSubmit
-        // We'll show a loading state while it's submitting
+    form.addEventListener('submit', async event => {
+        event.preventDefault();
+
         if (!form.checkValidity()) {
-            event.preventDefault();
             form.reportValidity?.();
             return;
         }
 
+        // Get form data
+        const formData = new FormData(form);
+        const data = {
+            fullName: formData.get('fullName'),
+            email: formData.get('email'),
+            phone: formData.get('phone'),
+            contactMethod: formData.get('contactMethod'),
+            device: formData.get('device'),
+            player: formData.get('player') || 'Not specified',
+            notes: formData.get('notes') || 'None'
+        };
+
+        // Show loading state
         if (submitButton) {
             submitButton.disabled = true;
             submitButton.textContent = 'Sending...';
@@ -548,8 +560,84 @@ if ('IntersectionObserver' in window) {
             messageEl.textContent = 'Submitting your request…';
         }
 
-        // Form will submit to FormSubmit, which will redirect to the success page
-        // No need to preventDefault or reset the form
+        // Prepare email body for mailto fallback
+        const subject = encodeURIComponent('New Free Trial Request - Luna Streams');
+        const emailBody = 
+            `New Free Trial Request\n\n` +
+            `Contact Details:\n` +
+            `Name: ${data.fullName}\n` +
+            `Email: ${data.email}\n` +
+            `Phone: ${data.phone}\n` +
+            `Preferred Contact Method: ${data.contactMethod}\n\n` +
+            `Streaming Preferences:\n` +
+            `Primary Device: ${data.device}\n` +
+            `Player/App: ${data.player}\n` +
+            `Additional Notes: ${data.notes}\n\n` +
+            `---\n` +
+            `This request was submitted via the Luna Streams free trial form.`;
+        const body = encodeURIComponent(emailBody);
+        const mailtoLink = `mailto:lunastreamsau@gmail.com?subject=${subject}&body=${body}`;
+
+        // Try FormSubmit AJAX endpoint first (more reliable than form action)
+        try {
+            const response = await fetch('https://formsubmit.co/ajax/lunastreamsau@gmail.com', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify({
+                    name: data.fullName,
+                    email: data.email,
+                    phone: data.phone,
+                    contactMethod: data.contactMethod,
+                    device: data.device,
+                    player: data.player,
+                    notes: data.notes,
+                    _subject: 'New Free Trial Request - Luna Streams',
+                    _captcha: false
+                })
+            });
+
+            if (response.ok) {
+                const result = await response.json();
+                if (result.success) {
+                    // Success - FormSubmit worked
+                    if (messageEl) {
+                        messageEl.classList.add('trial-form__message--success');
+                        messageEl.textContent = 'Thanks! Our AEST support team will reach out shortly with your trial credentials.';
+                    }
+                    form.reset();
+                    return;
+                }
+            }
+            // If we get here, FormSubmit didn't work - fall through to mailto
+            throw new Error('FormSubmit service unavailable');
+        } catch (error) {
+            // FormSubmit is down or failed - use mailto fallback
+            // This always works and doesn't depend on external services
+            if (messageEl) {
+                messageEl.classList.remove('trial-form__message--error');
+                messageEl.classList.add('trial-form__message--success');
+                messageEl.innerHTML = 'Opening your email client... Please send the pre-filled email to complete your request.';
+            }
+            
+            // Automatically open the mailto link (this always works)
+            window.location.href = mailtoLink;
+            
+            // Reset form after a short delay
+            setTimeout(() => {
+                form.reset();
+            }, 1000);
+        } finally {
+            // Re-enable submit button after a delay
+            setTimeout(() => {
+                if (submitButton) {
+                    submitButton.disabled = false;
+                    submitButton.textContent = originalLabel;
+                }
+            }, 2000);
+        }
     });
 })();
 
