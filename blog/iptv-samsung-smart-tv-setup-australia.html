@@ -126,6 +126,286 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"></noscript>
+    <style>
+        /* Blog Article Content Spacing */
+        .blog-article__main article > section {
+            margin-bottom: 48px;
+        }
+        
+        .blog-article__main article > section:last-child {
+            margin-bottom: 0;
+        }
+        
+        /* FAQ Section Styling */
+        #faq {
+            margin-top: 60px;
+            margin-bottom: 40px;
+        }
+        
+        #faq > div[role="list"] {
+            display: grid;
+            gap: 12px;
+            margin-top: 24px;
+        }
+        
+        #faq .faq-item {
+            margin: 0;
+        }
+        
+        #faq .faq-question {
+            padding: 20px 24px;
+        }
+        
+        #faq .faq-question-text {
+            font-size: 18px;
+            font-weight: 600;
+        }
+        
+        #faq .faq-answer {
+            padding: 0 24px 20px;
+            font-size: 16px;
+            line-height: 1.7;
+        }
+        
+        #faq .faq-icon {
+            width: 24px;
+            height: 24px;
+        }
+        
+        #faq .faq-icon svg {
+            width: 12px;
+            height: 12px;
+        }
+        
+        /* Info boxes styling */
+        .info-box, .tip-box, .warning-box, .success-box {
+            background: rgba(224, 242, 254, 0.4);
+            border-left: 4px solid var(--color-primary);
+            border-radius: 8px;
+            padding: 16px 20px;
+            margin: 20px 0;
+        }
+        
+        .tip-box {
+            background: rgba(255, 226, 109, 0.15);
+            border-left-color: #ffe26d;
+        }
+        
+        .warning-box {
+            background: rgba(255, 193, 7, 0.1);
+            border-left-color: #ffc107;
+        }
+        
+        .success-box {
+            background: rgba(76, 175, 80, 0.1);
+            border-left-color: #4caf50;
+        }
+        
+        .info-box h3, .info-box h4 {
+            margin-top: 0;
+            margin-bottom: 12px;
+        }
+        
+        /* Benefits grid */
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 16px;
+            margin: 24px 0;
+        }
+        
+        .benefit-card {
+            background: rgba(224, 242, 254, 0.3);
+            border: 1px solid rgba(14, 165, 233, 0.2);
+            border-radius: 12px;
+            padding: 20px;
+        }
+        
+        .benefit-card h3 {
+            margin-top: 0;
+            margin-bottom: 12px;
+            font-size: 18px;
+        }
+        
+        /* App comparison */
+        .app-comparison {
+            display: grid;
+            gap: 20px;
+            margin: 24px 0;
+        }
+        
+        .app-card {
+            background: var(--color-white);
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+        }
+        
+        .app-card.featured {
+            border-color: var(--color-primary);
+            border-width: 2px;
+        }
+        
+        .app-card h3 {
+            margin-top: 0;
+            margin-bottom: 12px;
+        }
+        
+        .rating {
+            color: #ffc107;
+            margin-bottom: 16px;
+            font-size: 14px;
+        }
+        
+        /* Setup steps */
+        .setup-step {
+            margin: 32px 0;
+            padding: 20px 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+        }
+        
+        .setup-step:last-child {
+            border-bottom: none;
+        }
+        
+        .setup-step h3 {
+            margin-top: 0;
+        }
+        
+        /* Troubleshooting */
+        .troubleshooting-grid {
+            display: grid;
+            gap: 20px;
+            margin: 24px 0;
+        }
+        
+        .trouble-item {
+            background: var(--color-white);
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+        }
+        
+        .trouble-item h3 {
+            margin-top: 0;
+            margin-bottom: 16px;
+        }
+        
+        .trouble-solution h4 {
+            margin-top: 16px;
+            margin-bottom: 8px;
+            font-size: 16px;
+        }
+        
+        /* Conclusion and CTA */
+        .conclusion-benefits {
+            margin: 24px 0;
+        }
+        
+        .checkmark-list {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .checkmark-list li {
+            padding: 8px 0;
+        }
+        
+        .cta-section {
+            background: rgba(224, 242, 254, 0.3);
+            border-radius: 16px;
+            padding: 32px;
+            margin: 40px 0;
+            text-align: center;
+        }
+        
+        .cta-section h3 {
+            margin-top: 0;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 24px;
+        }
+        
+        .related-guides {
+            margin: 32px 0;
+        }
+        
+        .related-guides ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .related-guides li {
+            padding: 8px 0;
+        }
+        
+        /* Standardize content blocks */
+        .blog-article section > div:not(.table-of-contents):not(.benefits-grid):not(.app-comparison):not(.troubleshooting-grid):not(.conclusion-benefits):not(.cta-section):not(.related-guides) {
+            margin: 20px 0;
+        }
+        
+        .blog-article section h3 {
+            font-size: 22px;
+            margin-top: 32px;
+            margin-bottom: 16px;
+        }
+        
+        .blog-article section h4 {
+            font-size: 18px;
+            margin-top: 24px;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+        
+        .blog-article section ol,
+        .blog-article section ul {
+            margin: 16px 0;
+            padding-left: 28px;
+        }
+        
+        .blog-article section li {
+            margin: 8px 0;
+        }
+        
+        /* Table styling */
+        .blog-article section table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 24px 0;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+        
+        .blog-article section table thead {
+            background: rgba(14, 165, 233, 0.1);
+        }
+        
+        .blog-article section table th {
+            padding: 14px 16px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 15px;
+            color: var(--color-primary);
+        }
+        
+        .blog-article section table td {
+            padding: 12px 16px;
+            border-top: 1px solid rgba(0, 0, 0, 0.06);
+            font-size: 15px;
+        }
+        
+        .blog-article section table tbody tr:hover {
+            background: rgba(14, 165, 233, 0.03);
+        }
+    </style>
 </head>
 
 <body class="blog-article">
@@ -761,146 +1041,180 @@
                     </div>
                 </section>
 
-                <!-- FAQ Section -->
-                <section id="faq" itemscope itemtype="https://schema.org/FAQPage">
-                    <h2>Frequently Asked Questions: IPTV on Samsung Smart TV Australia</h2>
-
-                    <div class="faq-container">
-                        
-                        <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-                            <h3 itemprop="name">Is IPTV legal on Samsung Smart TV in Australia?</h3>
-                            <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-                                <div itemprop="text">
-                                    <p>Yes, using IPTV technology on your Samsung Smart TV is completely legal in Australia. However, it's crucial to subscribe to a legitimate IPTV provider like Luna Streams that has proper licensing for the content they distribute. Using unauthorized or "pirate" IPTV services can be illegal.</p>
-                                    <p>Luna Streams operates legally and provides licensed content with full compliance with Australian broadcasting laws.</p>
-                                    <p><strong><a href="../faq-legal.html">Learn more about IPTV legality in Australia →</a></strong></p>
-                                </div>
+            <section id="faq" itemscope itemtype="https://schema.org/FAQPage">
+                <h2>Frequently asked questions</h2>
+                <div role="list">
+                    <article class="faq-item is-open" role="listitem" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+                        <button class="faq-question" type="button" aria-expanded="true">
+                            <span class="faq-question-text" itemprop="name">Is IPTV legal on Samsung Smart TV in Australia?</span>
+                            <span class="faq-icon" aria-hidden="true">
+                                <svg fill="none" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </span>
+                        </button>
+                        <div class="faq-answer" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                            <div itemprop="text">
+                                <p>Yes, using IPTV technology on your Samsung Smart TV is completely legal in Australia. However, it's crucial to subscribe to a legitimate IPTV provider like Luna Streams that has proper licensing for the content they distribute. Using unauthorized or "pirate" IPTV services can be illegal.</p>
+                                <p>Luna Streams operates legally and provides licensed content with full compliance with Australian broadcasting laws. <a href="../faq-legal.html">Learn more about IPTV legality in Australia</a>.</p>
                             </div>
                         </div>
+                    </article>
 
-                        <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-                            <h3 itemprop="name">Do I need a VPN to use IPTV on Samsung Smart TV?</h3>
-                            <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-                                <div itemprop="text">
-                                    <p>A VPN is not required to use IPTV on your Samsung Smart TV in Australia, especially if you're using a legitimate service like Luna Streams. However, some users choose to use a VPN for these benefits:</p>
-                                    <ul>
-                                        <li>Prevent ISP throttling (some Australian ISPs slow down streaming traffic)</li>
-                                        <li>Improve streaming speeds on congested networks</li>
-                                        <li>Add an extra layer of privacy</li>
-                                        <li>Access geo-restricted content from other countries</li>
-                                    </ul>
-                                    <p>If you decide to use a VPN, make sure it's a fast one to avoid reducing your streaming speeds.</p>
-                                </div>
+                    <article class="faq-item" role="listitem" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+                        <button class="faq-question" type="button" aria-expanded="false">
+                            <span class="faq-question-text" itemprop="name">Do I need a VPN to use IPTV on Samsung Smart TV?</span>
+                            <span class="faq-icon" aria-hidden="true">
+                                <svg fill="none" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </span>
+                        </button>
+                        <div class="faq-answer" hidden itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                            <div itemprop="text">
+                                <p>A VPN is not required to use IPTV on your Samsung Smart TV in Australia, especially if you're using a legitimate service like Luna Streams. However, some users choose to use a VPN to prevent ISP throttling, improve streaming speeds on congested networks, add an extra layer of privacy, or access geo-restricted content from other countries.</p>
+                                <p>If you decide to use a VPN, make sure it's a fast one to avoid reducing your streaming speeds.</p>
                             </div>
                         </div>
+                    </article>
 
-                        <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-                            <h3 itemprop="name">What internet speed do I need for IPTV on Samsung Smart TV?</h3>
-                            <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-                                <div itemprop="text">
-                                    <p>For HD streaming on your Samsung Smart TV, you need a minimum of 10 Mbps download speed. For 4K content, aim for 25 Mbps or higher. Most Australian NBN plans (NBN 50 or above) are more than sufficient for smooth IPTV streaming.</p>
-                                    <p><strong>Speed requirements breakdown:</strong></p>
-                                    <ul>
-                                        <li>SD Quality: 5 Mbps minimum</li>
-                                        <li>HD Quality (720p-1080p): 10-15 Mbps</li>
-                                        <li>4K Quality: 25-50 Mbps</li>
-                                    </ul>
-                                    <p>Remember, if multiple people are streaming simultaneously, you'll need more bandwidth.</p>
-                                </div>
+                    <article class="faq-item" role="listitem" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+                        <button class="faq-question" type="button" aria-expanded="false">
+                            <span class="faq-question-text" itemprop="name">What internet speed do I need for IPTV on Samsung Smart TV?</span>
+                            <span class="faq-icon" aria-hidden="true">
+                                <svg fill="none" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </span>
+                        </button>
+                        <div class="faq-answer" hidden itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                            <div itemprop="text">
+                                <p>For HD streaming on your Samsung Smart TV, you need a minimum of 10 Mbps download speed. For 4K content, aim for 25 Mbps or higher. Most Australian NBN plans (NBN 50 or above) are more than sufficient for smooth IPTV streaming.</p>
+                                <p>Speed requirements: SD Quality (5 Mbps minimum), HD Quality 720p-1080p (10-15 Mbps), 4K Quality (25-50 Mbps). Remember, if multiple people are streaming simultaneously, you'll need more bandwidth.</p>
                             </div>
                         </div>
+                    </article>
 
-                        <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-                            <h3 itemprop="name">Can I use Luna Streams on Samsung Smart TV?</h3>
-                            <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-                                <div itemprop="text">
-                                    <p>Yes! Luna Streams works perfectly on Samsung Smart TVs using apps like Smart IPTV or SS IPTV. Simply follow the setup guide above to install the IPTV app, then add your Luna Streams M3U URL or Xtream Codes credentials.</p>
-                                    <p>Luna Streams is optimized for Australian users with AEST support, fast servers in Australia, and compatibility with all major IPTV apps. Start your 24-hour free trial today to test it on your Samsung Smart TV.</p>
-                                    <p><strong><a href="../free-trial.html">Start Your Free Trial →</a></strong></p>
-                                </div>
+                    <article class="faq-item" role="listitem" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+                        <button class="faq-question" type="button" aria-expanded="false">
+                            <span class="faq-question-text" itemprop="name">Can I use Luna Streams on Samsung Smart TV?</span>
+                            <span class="faq-icon" aria-hidden="true">
+                                <svg fill="none" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </span>
+                        </button>
+                        <div class="faq-answer" hidden itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                            <div itemprop="text">
+                                <p>Yes! Luna Streams works perfectly on Samsung Smart TVs using apps like Smart IPTV or SS IPTV. Simply follow the setup guide above to install the IPTV app, then add your Luna Streams M3U URL or Xtream Codes credentials.</p>
+                                <p>Luna Streams is optimized for Australian users with AEST support, fast servers in Australia, and compatibility with all major IPTV apps. <a href="../free-trial.html">Start your 24-hour free trial today</a> to test it on your Samsung Smart TV.</p>
                             </div>
                         </div>
+                    </article>
 
-                        <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-                            <h3 itemprop="name">Which Samsung Smart TV models support IPTV apps?</h3>
-                            <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-                                <div itemprop="text">
-                                    <p>IPTV apps like Smart IPTV and SS IPTV are compatible with Samsung Smart TVs from 2016 onwards that run Tizen OS (versions 2.4 and above). This includes most modern Samsung models:</p>
-                                    <ul>
-                                        <li>Samsung QLED TVs (2017-2025)</li>
-                                        <li>Samsung Crystal UHD Series (2016+)</li>
-                                        <li>Samsung Frame TVs (2017+)</li>
-                                        <li>Samsung Neo QLED (2021+)</li>
-                                        <li>Most Samsung 4K and 8K TVs from 2016+</li>
-                                    </ul>
-                                    <p>To check if your TV is compatible, try searching for "Smart IPTV" or "SS IPTV" in the Samsung App Store.</p>
-                                </div>
+                    <article class="faq-item" role="listitem" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+                        <button class="faq-question" type="button" aria-expanded="false">
+                            <span class="faq-question-text" itemprop="name">Which Samsung Smart TV models support IPTV apps?</span>
+                            <span class="faq-icon" aria-hidden="true">
+                                <svg fill="none" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </span>
+                        </button>
+                        <div class="faq-answer" hidden itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                            <div itemprop="text">
+                                <p>IPTV apps like Smart IPTV and SS IPTV are compatible with Samsung Smart TVs from 2016 onwards that run Tizen OS (versions 2.4 and above). This includes most modern Samsung models: QLED TVs (2017-2025), Crystal UHD Series (2016+), Frame TVs (2017+), Neo QLED (2021+), and most Samsung 4K and 8K TVs from 2016+.</p>
+                                <p>To check if your TV is compatible, try searching for "Smart IPTV" or "SS IPTV" in the Samsung App Store.</p>
                             </div>
                         </div>
+                    </article>
 
-                        <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-                            <h3 itemprop="name">How many devices can I use with one Luna Streams subscription?</h3>
-                            <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-                                <div itemprop="text">
-                                    <p>Luna Streams subscription plans typically support 1-3 simultaneous connections, depending on the plan you choose. This means you can use your subscription on your Samsung Smart TV and also on other devices like your phone, tablet, or Firestick at the same time.</p>
-                                    <p>Check your specific plan details on the <a href="../index.html#pricing">Luna Streams pricing page</a> for exact multi-device limits.</p>
-                                </div>
+                    <article class="faq-item" role="listitem" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+                        <button class="faq-question" type="button" aria-expanded="false">
+                            <span class="faq-question-text" itemprop="name">How many devices can I use with one Luna Streams subscription?</span>
+                            <span class="faq-icon" aria-hidden="true">
+                                <svg fill="none" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </span>
+                        </button>
+                        <div class="faq-answer" hidden itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                            <div itemprop="text">
+                                <p>Luna Streams subscription plans typically support 1-3 simultaneous connections, depending on the plan you choose. This means you can use your subscription on your Samsung Smart TV and also on other devices like your phone, tablet, or Firestick at the same time.</p>
+                                <p>Check your specific plan details on the <a href="../index.html#pricing">Luna Streams pricing page</a> for exact multi-device limits.</p>
                             </div>
                         </div>
+                    </article>
 
-                        <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-                            <h3 itemprop="name">What channels can I watch on Samsung Smart TV with IPTV?</h3>
-                            <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-                                <div itemprop="text">
-                                    <p>With Luna Streams IPTV on your Samsung Smart TV, you get access to 22,500+ live channels including:</p>
-                                    <ul>
-                                        <li><strong>Australian Free-to-Air:</strong> 7, 9, 10, ABC, SBS</li>
-                                        <li><strong>Australian Sports:</strong> Fox Sports, ESPN, beIN Sports</li>
-                                        <li><strong>Sports:</strong> AFL, NRL, Cricket, Football, NBA, NFL, NHL</li>
-                                        <li><strong>Premium Movies:</strong> HBO, Cinemax, Showtime, Starz</li>
-                                        <li><strong>Entertainment:</strong> Discovery, History, Nat Geo, Comedy Central</li>
-                                        <li><strong>News:</strong> CNN, BBC, Sky News, Al Jazeera</li>
-                                        <li><strong>International:</strong> UK, USA, Canada, Europe, Middle East, Asia channels</li>
-                                        <li><strong>Kids:</strong> Cartoon Network, Disney, Nickelodeon</li>
-                                    </ul>
-                                    <p>All accessible directly on your Samsung Smart TV in HD and 4K quality.</p>
-                                </div>
+                    <article class="faq-item" role="listitem" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+                        <button class="faq-question" type="button" aria-expanded="false">
+                            <span class="faq-question-text" itemprop="name">What channels can I watch on Samsung Smart TV with IPTV?</span>
+                            <span class="faq-icon" aria-hidden="true">
+                                <svg fill="none" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </span>
+                        </button>
+                        <div class="faq-answer" hidden itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                            <div itemprop="text">
+                                <p>With Luna Streams IPTV on your Samsung Smart TV, you get access to 22,500+ live channels including Australian free-to-air (7, 9, 10, ABC, SBS), Australian sports (Fox Sports, ESPN, beIN Sports), international sports (AFL, NRL, Cricket, Football, NBA, NFL, NHL), premium movies (HBO, Cinemax, Showtime, Starz), entertainment, news, international channels, and kids' content.</p>
+                                <p>All accessible directly on your Samsung Smart TV in HD and 4K quality.</p>
                             </div>
                         </div>
+                    </article>
 
-                        <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-                            <h3 itemprop="name">Does IPTV work with NBN internet in Australia?</h3>
-                            <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-                                <div itemprop="text">
-                                    <p>Yes! IPTV works excellently with Australian NBN internet. As long as you have an NBN 50 plan or higher (50 Mbps download speed), you'll have no issues streaming HD IPTV content on your Samsung Smart TV. For 4K streaming, we recommend NBN 100 or higher.</p>
-                                    <p>Luna Streams is optimized for Australian internet connections, including NBN, and uses local servers for fast streaming speeds across Australia.</p>
-                                    <p><strong><a href="internet-speed-for-iptv-australia.html">Read more: Internet Speed Requirements for IPTV Australia →</a></strong></p>
-                                </div>
+                    <article class="faq-item" role="listitem" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+                        <button class="faq-question" type="button" aria-expanded="false">
+                            <span class="faq-question-text" itemprop="name">Does IPTV work with NBN internet in Australia?</span>
+                            <span class="faq-icon" aria-hidden="true">
+                                <svg fill="none" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </span>
+                        </button>
+                        <div class="faq-answer" hidden itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                            <div itemprop="text">
+                                <p>Yes! IPTV works excellently with Australian NBN internet. As long as you have an NBN 50 plan or higher (50 Mbps download speed), you'll have no issues streaming HD IPTV content on your Samsung Smart TV. For 4K streaming, we recommend NBN 100 or higher.</p>
+                                <p>Luna Streams is optimized for Australian internet connections, including NBN, and uses local servers for fast streaming speeds across Australia. <a href="internet-speed-for-iptv-australia.html">Read more about internet speed requirements for IPTV Australia</a>.</p>
                             </div>
                         </div>
+                    </article>
 
-                        <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-                            <h3 itemprop="name">Is Smart IPTV app free for Samsung TV?</h3>
-                            <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-                                <div itemprop="text">
-                                    <p>Smart IPTV requires a one-time activation fee of approximately €7-10 (about $12-17 AUD) to use on your Samsung Smart TV. This is a lifetime activation for that specific device.</p>
-                                    <p>If you prefer a completely free option, you can use <strong>SS IPTV</strong> instead, which is available for free in the Samsung App Store and works similarly to Smart IPTV. Both apps are compatible with Luna Streams.</p>
-                                </div>
+                    <article class="faq-item" role="listitem" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+                        <button class="faq-question" type="button" aria-expanded="false">
+                            <span class="faq-question-text" itemprop="name">Is Smart IPTV app free for Samsung TV?</span>
+                            <span class="faq-icon" aria-hidden="true">
+                                <svg fill="none" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </span>
+                        </button>
+                        <div class="faq-answer" hidden itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                            <div itemprop="text">
+                                <p>Smart IPTV requires a one-time activation fee of approximately €7-10 (about $12-17 AUD) to use on your Samsung Smart TV. This is a lifetime activation for that specific device.</p>
+                                <p>If you prefer a completely free option, you can use <strong>SS IPTV</strong> instead, which is available for free in the Samsung App Store and works similarly to Smart IPTV. Both apps are compatible with Luna Streams.</p>
                             </div>
                         </div>
+                    </article>
 
-                        <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-                            <h3 itemprop="name">Can I record live TV with IPTV on Samsung Smart TV?</h3>
-                            <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-                                <div itemprop="text">
-                                    <p>Recording capabilities depend on the IPTV app you're using. Smart IPTV does not have built-in recording features. However, many IPTV services like Luna Streams offer catch-up TV and VOD (Video on Demand), allowing you to watch recently aired content on-demand without needing to record.</p>
-                                    <p>If recording is important to you, consider using an external device like Firestick or Android TV Box with apps that support recording functionality.</p>
-                                </div>
+                    <article class="faq-item" role="listitem" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+                        <button class="faq-question" type="button" aria-expanded="false">
+                            <span class="faq-question-text" itemprop="name">Can I record live TV with IPTV on Samsung Smart TV?</span>
+                            <span class="faq-icon" aria-hidden="true">
+                                <svg fill="none" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </span>
+                        </button>
+                        <div class="faq-answer" hidden itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+                            <div itemprop="text">
+                                <p>Recording capabilities depend on the IPTV app you're using. Smart IPTV does not have built-in recording features. However, many IPTV services like Luna Streams offer catch-up TV and VOD (Video on Demand), allowing you to watch recently aired content on-demand without needing to record.</p>
+                                <p>If recording is important to you, consider using an external device like Firestick or Android TV Box with apps that support recording functionality.</p>
                             </div>
                         </div>
-
-                    </div>
-                </section>
+                    </article>
+                </div>
+            </section>
 
                 <!-- Conclusion -->
                 <section class="conclusion">
@@ -969,33 +1283,38 @@
         </article>
     </main>
 
-    <footer class="blog-footer">
-        <div class="footer-container">
-            <div class="footer-logo">
-                <picture>
-                    <source srcset="../logo.webp" type="image/webp">
-                    <img src="../logo.png" alt="Luna Streams IPTV Australia" width="1563" height="1563" loading="lazy">
-                </picture>
+    <footer class="main-footer">
+        <div class="footer-content" role="contentinfo">
+            <div class="footer-brand">
+                <a href="../index.html#main-content" class="footer-logo" aria-label="Luna Streams home">
+                    <picture>
+                        <source srcset="../logo.webp" type="image/webp">
+                        <img src="../logo.png" alt="Luna Streams - Best IPTV Australia provider logo" width="1563" height="1563">
+                    </picture>
+                </a>
+                <p>Stream 10,000+ channels with Australian-first support, reliable uptime, and plans built for every screen in your home.</p>
+                <ul class="footer-contact">
+                    <li><a href="mailto:lunastreamsau@gmail.com">lunastreamsau@gmail.com</a></li>
+                    <li><a href="tel:+15027055693">+1 502 705 5693</a></li>
+                </ul>
             </div>
-            <div class="footer-links">
+            <div class="footer-links" aria-label="Footer navigation">
                 <div class="footer-links__group">
-                    <h5>Luna Streams</h5>
+                    <h5>Explore</h5>
                     <ul>
-                        <li><a href="../index.html">Home</a></li>
-                        <li><a href="../index.html#pricing">Pricing Plans</a></li>
-                        <li><a href="../free-trial.html">Free 24-Hour Trial</a></li>
-                        <li><a href="../become-a-reseller.html">Become a Reseller</a></li>
-                        <li><a href="../contact.html">Contact Us</a></li>
+                        <li><a href="../index.html#pricing">Plans &amp; Pricing</a></li>
+                        <li><a href="../index.html#devices">Supported Devices</a></li>
+                        <li><a href="../free-trial.html#trial-form">Start Free Trial</a></li>
+                        <li><a href="index.html">Blog Library</a></li>
                     </ul>
                 </div>
                 <div class="footer-links__group">
-                    <h5>Resources</h5>
+                    <h5>Company</h5>
                     <ul>
-                        <li><a href="index.html">Blog</a></li>
-                        <li><a href="../faq-legal.html">Legal &amp; Safety FAQ</a></li>
-                        <li><a href="is-iptv-legal-in-australia.html">Is IPTV Legal?</a></li>
-                        <li><a href="best-iptv-providers-australia.html">Best IPTV Providers</a></li>
-                        <li><a href="install-iptv-firestick-australia.html">Firestick Setup Guide</a></li>
+                        <li><a href="../contact.html">Contact</a></li>
+                        <li><a href="../become-a-reseller.html">Become a Reseller</a></li>
+                        <li><a href="../index.html#support">AEST Support Hours</a></li>
+                        <li><a href="../faq-legal.html">Legal &amp; Safety</a></li>
                     </ul>
                 </div>
                 <div class="footer-links__group">
