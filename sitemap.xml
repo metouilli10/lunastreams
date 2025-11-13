@@ -32,6 +32,12 @@
   
   <!-- Blog Posts - Medium Priority -->
   <url>
+    <loc>https://lunastreams.net/blog/iptv-samsung-smart-tv-setup-australia.html</loc>
+    <lastmod>2025-01-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://lunastreams.net/blog/avoid-iptv-scams-australia.html</loc>
     <lastmod>2025-01-15</lastmod>
     <changefreq>monthly</changefreq>

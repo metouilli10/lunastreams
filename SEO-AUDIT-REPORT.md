@@ -106,10 +106,10 @@ All pages now have proper hreflang tags with `en-au` and `x-default` attributes.
 - ✅ Organization schema exists on homepage ✓
 - ✅ FAQPage schema exists on homepage and FAQ pages ✓
 - ✅ **Product schema added to homepage with 4 products** ✓
-  - Pack Neptune (3 months) - $44.99 AUD
-  - Pack Uranus (6 months) - $54.99 AUD
-  - Pack Venus (24 months) - $129.99 AUD
-  - Pack Jupiter (12 months) - $74.99 AUD
+  - Pack Neptune (3 months) - $45 AUD
+  - Pack Uranus (6 months) - $55 AUD
+  - Pack Venus (24 months) - $130 AUD
+  - Pack Jupiter (12 months) - $75 AUD
 
 
 **Fix Applied:**
