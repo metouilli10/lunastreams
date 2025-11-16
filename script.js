@@ -10,6 +10,8 @@ document.addEventListener('DOMContentLoaded', function() {
     if (localStorage.getItem('cookiesAccepted')) {
         cookieBanner.setAttribute('hidden', '');
         document.documentElement.classList.add('cookies-accepted');
+        // Auto-load video if cookies already accepted
+        loadVimeoVideo();
     }
 
     // Accept cookies
@@ -18,6 +20,8 @@ document.addEventListener('DOMContentLoaded', function() {
             localStorage.setItem('cookiesAccepted', 'true');
             cookieBanner.setAttribute('hidden', '');
             document.documentElement.classList.add('cookies-accepted');
+            // Auto-load video after accepting cookies
+            loadVimeoVideo();
         });
     }
 
@@ -27,6 +31,52 @@ document.addEventListener('DOMContentLoaded', function() {
             localStorage.setItem('cookiesAccepted', 'true');
             cookieBanner.setAttribute('hidden', '');
             document.documentElement.classList.add('cookies-accepted');
+            // Auto-load video after accepting cookies
+            loadVimeoVideo();
+        });
+    }
+});
+
+// Vimeo Video Lazy Loading
+function loadVimeoVideo() {
+    const placeholder = document.getElementById('vimeo-placeholder');
+    const loadButton = document.getElementById('vimeo-load-button');
+    const iframe = document.querySelector('.vimeo-iframe');
+    
+    if (!iframe) return;
+    
+    // If iframe already loaded, do nothing
+    if (iframe.src) return;
+    
+    // Get the src from data-src attribute
+    const videoSrc = iframe.getAttribute('data-src');
+    if (!videoSrc) return;
+    
+    // Set the src to load the iframe
+    iframe.src = videoSrc;
+    iframe.style.display = 'block';
+    
+    // Hide placeholder
+    if (placeholder) {
+        placeholder.style.display = 'none';
+    }
+    
+    // Remove button if exists
+    if (loadButton) {
+        loadButton.style.display = 'none';
+    }
+}
+
+// Manual video load button handler
+document.addEventListener('DOMContentLoaded', function() {
+    const loadButton = document.getElementById('vimeo-load-button');
+    
+    if (loadButton) {
+        loadButton.addEventListener('click', function() {
+            // Set cookies as accepted when user manually loads video
+            localStorage.setItem('cookiesAccepted', 'true');
+            document.documentElement.classList.add('cookies-accepted');
+            loadVimeoVideo();
         });
     }
 });
