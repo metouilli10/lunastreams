@@ -4692,6 +4692,17 @@ main {
     padding-left: 24px;
 }
 
+/* Blog footer text - white color for all blog pages */
+.blog-shell .footer-brand p,
+.blog-article .footer-brand p {
+    color: var(--color-white) !important;
+}
+
+.blog-shell .footer-note,
+.blog-article .footer-note {
+    color: var(--color-white) !important;
+}
+
 .article-figure {
     margin: 0;
     border-radius: 18px;
