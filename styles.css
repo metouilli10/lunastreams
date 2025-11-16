@@ -38,12 +38,17 @@ body {
 
 /* Prevent deprecated API warning for H1UserAgentFontSizeInSection */
 /* Explicitly set font-size and margin to override user agent default */
-section h1,
-article h1,
-nav h1,
-aside h1 {
+/* Use :where() for zero specificity to avoid overriding existing styles */
+:where(section, article, nav, aside, main, header, footer) h1 {
     font-size: 2em;
     margin-block: 0.67em;
+    margin-inline: 0;
+}
+
+/* Fallback for any h1 not covered by specific selectors */
+:where(h1) {
+    margin-block: 0.67em;
+    font-size: 2em;
 }
 
 /* Cookie Banner */
