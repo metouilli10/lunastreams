@@ -1,0 +1,24 @@
+{
+  "name": "mina",
+  "version": "1.0.0",
+  "description": "",
+  "main": "script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/metouilli10/lunastreams.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/metouilli10/lunastreams/issues"
+  },
+  "homepage": "https://github.com/metouilli10/lunastreams#readme",
+  "dependencies": {
+    "@vercel/analytics": "^1.5.0"
+  }
+}
