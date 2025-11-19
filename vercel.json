@@ -6,14 +6,14 @@
       "permanent": true
     },
     {
-      "source": "/:path*",
+      "source": "/(.*)",
       "has": [
         {
           "type": "host",
           "value": "www.lunastreams.net"
         }
       ],
-      "destination": "https://lunastreams.net/:path*",
+      "destination": "https://lunastreams.net/$1",
       "permanent": true
     }
   ],
