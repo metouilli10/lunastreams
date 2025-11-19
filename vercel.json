@@ -4,17 +4,6 @@
       "source": "/index.html",
       "destination": "/",
       "permanent": true
-    },
-    {
-      "source": "/(.*)",
-      "has": [
-        {
-          "type": "host",
-          "value": "www.lunastreams.net"
-        }
-      ],
-      "destination": "https://lunastreams.net/$1",
-      "permanent": true
     }
   ],
   "headers": [
