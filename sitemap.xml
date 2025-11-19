@@ -128,6 +128,56 @@
     <priority>0.7</priority>
   </url>
   
+  <!-- New SEO-Optimized Blog Posts - High Priority (Keyword-Rich) -->
+  <url>
+    <loc>https://lunastreams.net/blog/best-iptv-service-australia.html</loc>
+    <lastmod>2025-01-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://lunastreams.net/blog/how-to-set-up-iptv-australia.html</loc>
+    <lastmod>2025-01-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://lunastreams.net/blog/iptv-subscription-australia.html</loc>
+    <lastmod>2025-01-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://lunastreams.net/blog/best-iptv-app-australian-users.html</loc>
+    <lastmod>2025-01-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://lunastreams.net/blog/iptv-service-4k-support-australia.html</loc>
+    <lastmod>2025-01-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://lunastreams.net/blog/iptv-box-smart-tv-australia.html</loc>
+    <lastmod>2025-01-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://lunastreams.net/blog/how-to-choose-best-iptv-provider-australia.html</loc>
+    <lastmod>2025-01-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://lunastreams.net/blog/iptv-australian-channels-movies.html</loc>
+    <lastmod>2025-01-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
   <!-- Other Pages - Medium Priority -->
   <url>
     <loc>https://lunastreams.net/contact.html</loc>
